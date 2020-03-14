@@ -6,5 +6,5 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     network = NetworkManager()
-    return "zika bagarai não e mesmo?"
+    return "xxxxx"
 
