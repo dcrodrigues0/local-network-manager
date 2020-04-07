@@ -1,10 +1,7 @@
 from flask import Flask
-from service.NetworkManager import NetworkManager
+from container.endpoints.test import test
 
 app = Flask(__name__)
+app.register_blueprint(test)
 
-@app.route("/")
-def hello():
-    network = NetworkManager()
-    return "zika bagarai não e mesmo?"
 

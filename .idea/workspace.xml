@@ -1,22 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f3826b1-1d55-42f1-a3c8-7a458f824bec" name="Default Changelist" comment="" />
+    <list default="true" id="1f3826b1-1d55-42f1-a3c8-7a458f824bec" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/container/endpoints/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskStart.sh" beforeDir="false" afterPath="$PROJECT_DIR$/flaskStart.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/NetworkManager.py" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Z390DMexAXoPBXl6yX7JrI49r3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/run.sh" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/flaskStart.sh" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/container/configs" />
       <recent name="$PROJECT_DIR$/venv" />
+      <recent name="$PROJECT_DIR$/container" />
+      <recent name="$PROJECT_DIR$/controller" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -31,7 +55,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Shell Script.Start Flask app">
+    <configuration name="Start Flask app" type="ShConfigurationType">
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/flaskStart.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/usr/bin/zsh" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="ShConfigurationType">
       <option name="SCRIPT_PATH" value="$PROJECT_DIR$/run.sh" />
       <option name="SCRIPT_OPTIONS" value="" />
@@ -46,6 +77,10 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Shell Script.run" />
+      <item itemvalue="Shell Script.Start Flask app" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -59,5 +94,21 @@
       <updated>1584056686017</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
