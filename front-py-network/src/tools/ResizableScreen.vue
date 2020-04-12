@@ -1,6 +1,6 @@
 <template>
-  <div :style="{'width':widthProp}" class="resizable-screen">
-    <p class="title-graph">{{title}}</p>
+  <div v-bind:style="{'width':widthProp,'height':heightProp}" class="resizable-screen">
+    <p class="title-graph">{{ title }}</p>
   </div>
 </template>
 
@@ -38,11 +38,17 @@
   }
 
    .resizable-screen{
-       /*width: 300px;*/
-       height: 150px;
-       background-color: #212124;
-       margin: 5px;
+    resize: both;
+    overflow: auto;
+    background-color: #212124;
+    margin: 5px;
    }
+
+   ::-webkit-resizer{ 
+      background-color:#212124!important; 
+   }
+
+    
 </style>
 
 

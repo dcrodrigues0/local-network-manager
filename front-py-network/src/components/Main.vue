@@ -16,10 +16,10 @@
     </div>
     <div class="content-graphs">
       <div class="graphs">
-        <ResizableScreen widthProp="350px" heightProp="400" title="MAC use"/>
-        <ResizableScreen widthProp="350px" heightProp="400" title="Network use"/>
-        <ResizableScreen widthProp="350px" heightProp="400" title="Trafic use"/>
-        <ResizableScreen widthProp="350px" heightProp="400" title="RAM use"/>
+        <ResizableScreen widthProp="350px" heightProp="150px" title="MAC use"/>
+        <ResizableScreen widthProp="350px" heightProp="150px" title="Network use"/>
+        <ResizableScreen widthProp="350px" heightProp="150px" title="Trafic use"/>
+        <ResizableScreen widthProp="350px" heightProp="150px" title="RAM use"/>
       </div>
     </div>
   </main>
@@ -42,7 +42,7 @@
 <style>
    main{
      width: 100%;
-     height: 720px;
+     height: 100vh;
      background-color: #161719;
    }
 
