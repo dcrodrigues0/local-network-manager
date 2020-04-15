@@ -24,12 +24,10 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./container/database: /data/db
+      - ./container/database /data/db
     networks:
       - mongo-compose-network
 
 networks: 
     mongo-compose-network:
       driver: bridge
-
-#teste
