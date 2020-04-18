@@ -95,7 +95,7 @@ import Bar from '../charts/Bar';
     height: 13%;
     background-color: #000000;
     width: 100%;
-    bottom: 0px;
+    bottom: 10px;
     position: absolute;
     display: flex;
     flex-direction: row;
@@ -107,6 +107,7 @@ import Bar from '../charts/Bar';
     border-radius: 10px;
     resize: none!important;
     width: 200px!important;
+    z-index: 10;
   }
 
   .tools-tab{
@@ -152,7 +153,6 @@ import Bar from '../charts/Bar';
     overflow: auto;
     background-color: #212124;
     margin: 5px;
-    z-index: 10;
    }
 
    .resizable-screen-minimized p{
