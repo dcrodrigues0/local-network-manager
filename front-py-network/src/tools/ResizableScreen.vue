@@ -84,12 +84,11 @@ import Bar from '../charts/Bar';
 
 
 <style>
-
   .root{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-  }  
+  }
 
   .bottomBar{
     height: 13%;
@@ -108,6 +107,8 @@ import Bar from '../charts/Bar';
     resize: none!important;
     width: 200px!important;
     z-index: 10;
+    overflow: hidden;
+    height: 50px;
   }
 
   .tools-tab{
@@ -162,6 +163,16 @@ import Bar from '../charts/Bar';
    ::-webkit-resizer{ 
       background-color:#212124!important; 
    }
+
+   @media only screen and (max-width: 600px) {
+     .resizable-screen{
+        resize: none;
+        margin: 5px;
+    }
+
+
+
+   } 
     
 </style>
 

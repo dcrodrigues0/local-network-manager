@@ -16,7 +16,7 @@
     </div>
     <div class="content-graphs">
       <div class="graphs">
-        <ResizableScreen widthProp="350px" heightProp="350px" title="MAC use"/>
+        <ResizableScreen widthProp="350px" heightProp="150px" title="MAC use"/>
         <ResizableScreen widthProp="350px" heightProp="150px" title="Network use"/>
         <ResizableScreen widthProp="350px" heightProp="150px" title="Trafic use"/>
         <ResizableScreen widthProp="350px" heightProp="150px" title="RAM use"/>
@@ -126,6 +126,12 @@
     margin-top: 20px;
     color:#9f9f9f!important;
     font-size: 35px;
+  }
+
+  @media only screen and (max-width: 600px) {
+     .graphs{
+       margin-left: 0px;
+     }
   }
 
 </style>
