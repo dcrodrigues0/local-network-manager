@@ -2,14 +2,16 @@ import dpkt
 import socket
 import datetime
 from dpkt.compat import compat_ord
-from container.services.job import storage as st
+from container.services.sniffer import storage as st
+from container.util import util
 
 def parse(fileCap):
-    process = st.Storage()
+    storage = st.Storage()
     packets_length = 0
     packets_count = 0
-    day = 0
+    timestampArray = []
     listTraffic = []
+    hourTraffic = {}
 
     for ts, buf in fileCap:
         try:
@@ -17,30 +19,26 @@ def parse(fileCap):
             ip = eth.data
             src = socket.inet_ntoa(ip.src)
             timestamp = str(datetime.datetime.utcfromtimestamp(ts))
-
             packets_count+=1
             packets_length+=ip.len
 
-            day = timestamp.split(" ")[0].split("-")[2]
-            dataFormat = {'timestamp': timestamp, 'mac_origem':generate_mac_addr(eth.src), 'mac_destino':generate_mac_addr(eth.dst),
-                        'ip_origem': inet_to_str(ip.src), 'ip_destino': inet_to_str(ip.dst), 'packet_size': ip.len}
+            timestampArray = util.timestampFormat(timestamp)
 
-            listTraffic.append(dataFormat)
+            mac_destino = generate_mac_addr(eth.dst)
+            mac_origem = generate_mac_addr(eth.src)
 
-            #process.storageTraffic(dataFormat)
-            #print(dataFormat)
         except:
             pass
 
-    if len(listTraffic) > 0:
-        intraday = {'day':day,'tamanho_pacotes':packets_length, 'quantidade_pacotes':packets_count}
-        savetTraffic(listTraffic, intraday, process)
-        day = 0
+    dateMonthDat = timestampArray[2] + "-" + timestampArray[1]
+    hourTraffic = {"hour": timestampArray[3], "quantidade_pacotes": packets_count, "date": dateMonthDat}
+    intraday = {'date':dateMonthDat,'tamanho_pacotes':packets_length, 'quantidade_pacotes':packets_count, \
+                'avg': packets_length/packets_count}
+    savetTraffic(intraday, hourTraffic, storage)
+    day = 0
 
-
-
-def savetTraffic(list, intraday, storage):
-    storage.storageAll(trafficFull=list, trafficIntraday=intraday)
+def savetTraffic(intraday, hourTraffuc, storage):
+    storage.storageAll(trafficIntraday=intraday, hourTraffic=hourTraffuc)
 
 def generate_mac_addr(address):
     #Generate mac address
@@ -54,3 +52,5 @@ def inet_to_str(inet):
         return socket.inet_ntop(socket.AF_INET, inet)
     except ValueError:
         return socket.inet_ntop(socket.AF_INET6, inet)
+
+

@@ -1,5 +1,5 @@
 from flask import Flask
-from container.endpoints.test import test
+from container.endpoints.routes import routes
 
 app = Flask(__name__)
-app.register_blueprint(test)
+app.register_blueprint(routes)
