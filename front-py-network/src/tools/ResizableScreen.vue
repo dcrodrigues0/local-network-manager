@@ -8,16 +8,17 @@
         <p class="title-graph">{{ title }}</p>
       </div>
       <!--CHART BELOW PLEASE -->
-      <Bar :chartdata="{} " :options="{ responsive: true}" />
+      <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->
+      <Graph :style="{'width': 90%+'%', 'height':85 + '%'}"/>
     </div>
     <div class="bottomBar"/>
   </div>
 </template>
 
 <script>
-import Bar from '../charts/Bar';
+  import Graph from '../charts/Graph';
 
-  export default {
+  export default {  
     methods: {
       closeTab: function () {
         if(event.target.tagName == "path"){
@@ -54,29 +55,47 @@ import Bar from '../charts/Bar';
             let window = event.target.parentNode.parentNode
             document.querySelector('.root').appendChild(window);
           }
+      },
+      getWindowHeight() {
+        this.windowHeight = document.documentElement.clientHeight;
+      },
+    },
+    data () {
+        return {
+          windowHeight: 0,
+          dataGraph: null,
+        response: ""
       }
-    
+    },
+    mounted() {
+      this.$nextTick(function() {
+        window.addEventListener('resize', this.getWindowHeight);
+        //Init
+        this.getWindowHeight()        
+      });
     },
     components:{
-      Bar,
+      Graph
     },
     props: {
       widthProp: {
-        type: String,
-        required: true,
-        default: "350px"
-      },
-      heightProp: {
-        type: String,
-        required: true,
-        default: "150px"
-      },
-      title: {
-        type: String,
-        default: 'Favor colocar titulo :)'
-      },
-
+      type: String,
+      required: true,
+      default: "350px"
     },
+      heightProp: {
+      type: String,
+      required: true,
+      default: "150px"
+    },
+    title: {
+      type: String,
+      default: 'Favor colocar titulo :)'
+    },
+    
+    },
+
+
   }
 
 </script>
@@ -154,6 +173,7 @@ import Bar from '../charts/Bar';
     overflow: auto;
     background-color: #212124;
     margin: 5px;
+    position: relative;
    }
 
    .resizable-screen-minimized p{
