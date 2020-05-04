@@ -10,9 +10,13 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
     "core-js": "^3.6.4",
+    "fusioncharts": "^3.15.1-sr.1",
     "materialize-css": "^1.0.0-rc.2",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.0",
+    "vue-router": "^3.1.6"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
