@@ -1,16 +1,15 @@
 <template>
   <div id="app">
-    <Main />
+    <Index/>
   </div>
 </template>
 
 <script>
-  import Main from './components/Main.vue'
-
+  import Index from '@/view/index.vue'
   export default {
     name: 'app',
     components: {
-      Main
+      Index
   }
 
 }
@@ -25,5 +24,10 @@
   text-align: center;
   color: #2c3e50;
   
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 </style>

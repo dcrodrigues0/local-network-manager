@@ -7,7 +7,6 @@
         <a title="Minimizar gráfico" v-on:click="minimizeTab" href="#"><i class="fas fa-window-minimize"></i></a>
         <p class="title-graph">{{ title }}</p>
       </div>
-
       <div class="size-control">
         <a href="#" @click="zoomChart">
           <i class="fas fa-expand"></i>
@@ -21,13 +20,13 @@
       </div>
       <!--CHART BELOW PLEASE -->
       <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->
-      <Graph :style="{'width': 90%+'%', 'height':85 + '%'}"/>
+      <Bar :style="{'width': 90%+'%', 'height':85 + '%'}"/>
     </div>
   </div>
 </template>
 
 <script>
-  import Graph from '@/charts/Graph';
+  import Bar from '@/charts/Bar';
 
   export default {  
     methods: {
@@ -47,21 +46,17 @@
         if(event.target.tagName == "path"){
           let window = event.target.parentNode.parentNode.parentNode.parentNode
           window.childNodes[1].style.display = 'none'
-          
-          window.parentNode.className = 'root'
+        
           document.querySelector('.bottomBar').appendChild(window.parentNode);
         }else if(event.target.tagName == "svg"){
           let window = event.target.parentNode.parentNode.parentNode
           window.childNodes[1].style.display = 'none'
 
-          window.parentNode.className = 'root'
           document.querySelector('.bottomBar').appendChild(window.parentNode);
-
         }else if(event.target.tagName == "A"){
           let window = event.target.parentNode.parentNode
           window.childNodes[1].style.display = 'none'
 
-          window.parentNode.className = 'root'
           document.querySelector('.bottomBar').appendChild(window.parentNode);
         }
       },
@@ -70,17 +65,14 @@
             let window = event.target.parentNode.parentNode.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
 
-            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }else if(event.target.tagName == "svg"){
             let window = event.target.parentNode.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
-            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }else if(event.target.tagName == "A"){
             let window = event.target.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
-            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }
       },
@@ -131,7 +123,7 @@
     },
 
     components:{
-      Graph
+      Bar
     },
     props: {
       widthProp: {
@@ -205,9 +197,10 @@
   }
 
    .resizable-screen{
-    background-color: rgba(27, 26, 26, 0.856);
+    background-color: rgba(23, 23, 24, 0.801);
     margin: 5px;
     position: relative;
+    border: 1px solid rgb(66, 66, 66);
   }
 
     
@@ -238,6 +231,7 @@
      font-size:20px;
      margin-top: 5px;
      margin-right: 10px;
+     color: rgb(230, 97, 49);
    }
     
     
