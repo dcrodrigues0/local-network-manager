@@ -2,3 +2,5 @@ __pycache__
 .idea/workspace.xml
 .idea
 front-py-network/node_modules
+.env
+venv
