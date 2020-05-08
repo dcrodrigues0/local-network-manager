@@ -22,5 +22,5 @@ class Service(mongo.MongoDAO):
             labels.append(doc[campoLabel])
             dataset.append(doc[campoDataset])
 
-        return {'labels': labels, 'dataset': { 'data': dataset}}
+        return {'labels': labels, 'datasets': [{ 'data': dataset}] }
 
