@@ -3,7 +3,6 @@ from flask import request
 from container.services.sniffer import service
 from container.services.admin import admin
 
-
 routes = Blueprint('simple_page', __name__, template_folder='templates')
 service = service.Service()
 
@@ -12,11 +11,19 @@ def hello():
     name = request.args.get('name','')
     return "Hello World" + name
 
-@routes.route('/intraday')
+@routes.route('/date')
 def intraday():
-    date = request.args.get('date',00)
-    return service.getTrafficByDate(date)
+    try:
+        return responseData("success",200,service.getTrafficByDate(request.args.get('date',00)))
+    except:
+        return  responseData("error",500,[])
 
+@routes.route('/date/hour')
+def traffic_hour():
+    try:
+        return responseData("success",200,service.getTrafficHourByDate(request.args.get('date',00)))
+    except:
+        return  responseData("error",500,[])
 
 
 # --------------ADMIN----------------
@@ -29,3 +36,6 @@ def execProcess():
 #-----RESPONSE --------
 def responseSuccess():
     return {"Message": "Success", "Status":200}
+
+def responseData(message,status,data):
+    return {"Message": message, "Status":status, "data": data}

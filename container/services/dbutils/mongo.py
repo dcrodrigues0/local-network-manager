@@ -29,3 +29,6 @@ class MongoDAO():
     # --------- GET --------
     def getTrafficByDay(self, date):
         return self._db.trafficIntraday.find( {"date":date})
+
+    def getTrafficHour(self, date):
+        return self._db.trafficHour.find( {"date":date})

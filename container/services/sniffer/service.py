@@ -9,3 +9,6 @@ class Service(mongo.MongoDAO):
     def getTrafficByDate(self,date):
          return util.toJson(self.getTrafficByDay(date))
 
+
+    def getTrafficHourByDate(self, date):
+        util.toJson(self.getTrafficHour(date))

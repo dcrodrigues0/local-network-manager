@@ -18,7 +18,7 @@ def parse(fileCap):
             eth = dpkt.ethernet.Ethernet(buf)
             ip = eth.data
             src = socket.inet_ntoa(ip.src)
-            timestamp = str(datetime.datetime.utcfromtimestamp(ts))
+            timestamp = str(datetime.datetime.fromtimestamp(ts))
             packets_count+=1
             packets_length+=ip.len
 
@@ -33,7 +33,7 @@ def parse(fileCap):
     dateMonthDat = timestampArray[2] + "-" + timestampArray[1]
     hourTraffic = {"hour": timestampArray[3], "quantidade_pacotes": packets_count, "date": dateMonthDat}
     intraday = {'date':dateMonthDat,'tamanho_pacotes':packets_length, 'quantidade_pacotes':packets_count, \
-                'avg': packets_length/packets_count}
+                'avg': util.formatFloat(packets_length/packets_count)}
     savetTraffic(intraday, hourTraffic, storage)
     day = 0
 

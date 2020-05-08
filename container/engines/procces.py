@@ -11,12 +11,14 @@ backup = os.getenv("FILE_FOLDER_BACKUP")
 def proccess():
     print("Start process job")
 
-    if os.path.exists(fileSrc):
+    try:
+        os.path.exists(fileSrc)
         filecap, file = read()
         parser.parse(filecap)
         file.close()
-    else:
-        print("File not exist!!")
+    except  Exception as e:
+        print(e)
+        return e
 
 def read():
     f = open(fileSrc, 'rb')
