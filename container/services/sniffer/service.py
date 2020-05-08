@@ -11,4 +11,4 @@ class Service(mongo.MongoDAO):
 
 
     def getTrafficHourByDate(self, date):
-        util.toJson(self.getTrafficHour(date))
+        return util.toJson(self.getTrafficHour(date))
