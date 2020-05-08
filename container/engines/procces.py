@@ -1,10 +1,13 @@
 import os
 import shutil
+import stat
+
 import dpkt
 import time
 from container.engines import parsePcap as parser
 
-fileSrc = "/home/leonardo/Estudo/Faculdade/projetoPI/local-network-manager/files/packests.pcap"
+fileSrc = os.getenv("FILE_PATH")
+backup = os.getenv("FILE_FOLDER_BACKUP")
 def proccess():
     print("Start process job")
 
@@ -12,9 +15,6 @@ def proccess():
         filecap, file = read()
         parser.parse(filecap)
         file.close()
-
-        mili_seconds = lambda: int(round(time.time() * 1000))
-        #shutil.move(fileSrc, "/home/leonardo/Estudo/Faculdade/projetoPI/local-network-manager/files/backup/packests.pcap-"+ str(mili_seconds()))
     else:
         print("File not exist!!")
 
