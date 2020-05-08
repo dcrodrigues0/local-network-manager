@@ -11,7 +11,7 @@ class Service(mongo.MongoDAO):
 
 
     def getTrafficHourByDate(self, date):
-        return self.makeDataGraph(self.getTrafficHour(date), 'hour', 'date')
+        return self.makeDataGraph(self.getTrafficHour(date), 'hour', 'quantidade_pacotes')
 
 
     def makeDataGraph(self, value, campoLabel, campoDataset):
