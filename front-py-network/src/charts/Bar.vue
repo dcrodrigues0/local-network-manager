@@ -1,39 +1,22 @@
 <script>
-import { HorizontalBar } from 'vue-chartjs'
+import { Bar } from 'vue-chartjs'
 
 export default {
-  extends: HorizontalBar,
-  data: () => ({
-    type: 'horizontalBar',
-    chartdata: {
-      labels: ['January', 'February'],
-      datasets: [
-            {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [40, 40]
-            },
-            {
-              label: 'ta Foda',
-              backgroundColor: 'gray',
-              data: [30, 60]
-            },
-            {
-              label: 'fuck',
-              backgroundColor: 'red',
-              data: [50, 35]
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false
-        }
-  }),
-
-  mounted () {
-    this.renderChart(this.chartdata, this.options)
+  extends: Bar,
+  
+  data (){
+    return{
+      dataChart:null
+    }
+  },
+  created(){
+    this.$http.get('http://localhost:5000/date/hour?date=07-05')
+      .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true}))
+      
   }
 }
 
 </script>
+
+<style>
+</style>

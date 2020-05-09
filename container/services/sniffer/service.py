@@ -21,6 +21,6 @@ class Service(mongo.MongoDAO):
         for doc in value:
             labels.append(doc[campoLabel])
             dataset.append(doc[campoDataset])
-
-        return {'labels': labels, 'datasets': [{ 'data': dataset}] }
+        #Salve leo rs
+        return {'labels': labels, 'datasets': [{ 'data': dataset, 'backgroundColor':'lightblue'}] }
 
