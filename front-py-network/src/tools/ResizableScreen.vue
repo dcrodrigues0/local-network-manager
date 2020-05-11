@@ -135,19 +135,19 @@
     },
     props: {
       widthProp: {
-      type: String,
-      required: true,
-      default: "350px"
-    },
+        type: String,
+        required: true,
+        default: "350px"
+      },
       heightProp: {
-      type: String,
-      required: true,
-      default: "150px"
-    },
-    title: {
-      type: String,
-      default: 'Favor colocar titulo :)'
-    },
+        type: String,
+        required: true,
+        default: "150px"
+      },
+      title: {
+        type: String,
+        default: 'Favor colocar titulo :)'
+      },
     
     },
 
