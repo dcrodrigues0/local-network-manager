@@ -10,17 +10,14 @@ class Storage(mongo.MongoDAO):
         #self.storageTrafficFull(Kwargs.get("trafficFull"))
         self.saveIntraday(Kwargs.get("trafficIntraday"))
         self.saveTrafficByHour(Kwargs.get("hourTraffic"))
+        self.saveRealTime(Kwargs.get("realTimeTraffic"))
 
-
-    def storageTrafficFull(self, trafficFull):
-        self.saveTraffic(trafficFull)
-
-
-    def saveTraffic(self, data):
-        self.saveTrafficFull(data)
 
     def saveIntraday(self, trafficDay):
         self.saveTrafficDay(trafficDay)
 
     def saveTrafficByHour(self, hourTraffic):
         self.saveTrafficHourDay(hourTraffic)
+
+    def saveRealTime(self,realTime):
+        self.saveRealTimeTraffic(realTime)

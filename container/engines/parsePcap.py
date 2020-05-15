@@ -5,8 +5,9 @@ from dpkt.compat import compat_ord
 from container.services.sniffer import storage as st
 from container.util import util
 
+storage = st.Storage()
 def parse(fileCap):
-    storage = st.Storage()
+
     packets_length = 0
     packets_count = 0
     timestampArray = []
@@ -26,19 +27,24 @@ def parse(fileCap):
 
             mac_destino = generate_mac_addr(eth.dst)
             mac_origem = generate_mac_addr(eth.src)
-
         except:
             pass
 
+
     dateMonthDat = timestampArray[2] + "-" + timestampArray[1]
+    print(timestampArray)
+    realtime_info = {"min": timestampArray[4], "quantidade_pacotes":packets_count, "date":dateMonthDat}
     hourTraffic = {"hour": timestampArray[3], "quantidade_pacotes": packets_count, "date": dateMonthDat}
     intraday = {'date':dateMonthDat,'tamanho_pacotes':packets_length, 'quantidade_pacotes':packets_count, \
                 'avg': util.formatFloat(packets_length/packets_count)}
-    savetTraffic(intraday, hourTraffic, storage)
-    day = 0
 
-def savetTraffic(intraday, hourTraffuc, storage):
-    storage.storageAll(trafficIntraday=intraday, hourTraffic=hourTraffuc)
+    print()
+    print("---------------------------")
+    print()
+    savetTraffic(intraday, hourTraffic, realtime_info,storage)
+
+def savetTraffic(intraday, hourTraffuc, realtime_info ,storage):
+    storage.storageAll(trafficIntraday=intraday, hourTraffic=hourTraffuc, realTimeTraffic=realtime_info)
 
 def generate_mac_addr(address):
     #Generate mac address

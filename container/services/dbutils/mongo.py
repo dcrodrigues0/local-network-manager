@@ -26,9 +26,18 @@ class MongoDAO():
         self._db.trafficHour.insert(json)
         print("Finish Insert hour by day network traffic")
 
+    def saveRealTimeTraffic(self, json):
+        print("Start Insert realtime traffic")
+        self._db.realTime.insert(json)
+        print("Finish Insert realtime traffic")
+
+
     # --------- GET --------
     def getTrafficByDay(self, date):
         return self._db.trafficIntraday.find( {"date":date})
 
     def getTrafficHour(self, date):
         return self._db.trafficHour.find( {"date":date})
+
+    def getRealTime(self):
+        return self._db.realTime.find({})

@@ -1,27 +1,36 @@
 import os
-import shutil
-import stat
+import time
 
 import dpkt
-import time
+
 from container.engines import parsePcap as parser
 
 fileSrc = os.getenv("FILE_PATH")
 backup = os.getenv("FILE_FOLDER_BACKUP")
+queue = []
 def proccess():
-    print("Start process job")
 
-    try:
-        os.path.exists(fileSrc)
-        filecap, file = read()
-        parser.parse(filecap)
-        file.close()
-    except  Exception as e:
-        print(e)
-        return e
+    while True:
+        if len(queue) == 0:
+            continue
 
-def read():
-    f = open(fileSrc, 'rb')
+        print("queue size " + str(len(queue)))
+        try:
+            filepath = queue.pop()
+            filecap, file = read(filepath)
+            parser.parse(filecap)
+            file.close()
+            os.remove(filepath)
+        except Exception as e:
+            print(e)
+            return e
+
+        time.sleep(30)
+
+def read(filepath):
+    f = open(filepath, 'rb')
     pcap = dpkt.pcap.Reader(f)
     return pcap, f
 
+def addQueue(filepath):
+    queue.append(filepath)

@@ -25,6 +25,13 @@ def traffic_hour():
     except:
         return  responseData("error",500,[])
 
+@routes.route('/realtime')
+def realTime():
+    try:
+        return responseData("success",200,service.getRealTimeService())
+    except:
+        return  responseData("error",500,[])
+
 
 # --------------ADMIN----------------
 @routes.route('/admin/process')
@@ -39,3 +46,4 @@ def responseSuccess():
 
 def responseData(message,status,data):
     return {"Message": message, "Status":status, "data": data}
+
