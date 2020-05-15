@@ -15,6 +15,11 @@ class MongoDAO():
         self._db.trafficfull.insert_many(json)
         print("Finish Insert full network traffic")
 
+    def saveTrafficMac(self, json):
+        print("Start Insert Mac network traffic")
+        self._db.trafficMac.insert(json)
+        print("Finish Insert Mac network traffic")
+
 
     def saveTrafficDay(self, json):
         print("Start Insert day network traffic")

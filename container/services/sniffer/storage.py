@@ -11,6 +11,7 @@ class Storage(mongo.MongoDAO):
         self.saveIntraday(Kwargs.get("trafficIntraday"))
         self.saveTrafficByHour(Kwargs.get("hourTraffic"))
         self.saveRealTime(Kwargs.get("realTimeTraffic"))
+        self.saveTrafficByMac(Kwargs.get("trafficMac"))
 
 
     def saveIntraday(self, trafficDay):
@@ -21,3 +22,5 @@ class Storage(mongo.MongoDAO):
 
     def saveRealTime(self,realTime):
         self.saveRealTimeTraffic(realTime)
+    def saveTrafficByMac(self, trafficMac):
+        self.saveTrafficMac(trafficMac)
