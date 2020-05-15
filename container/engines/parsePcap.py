@@ -44,7 +44,7 @@ def parse(fileCap):
     print()
     print("---------------------------")
     print()
-    savetTraffic(intraday, hourTraffic, realtime_info,storage)
+    savetTraffic(intraday, hourTraffic, trafficMac, realtime_info,storage)
 
 def savetTraffic(intraday, hourTraffic, trafficMac, realtime_info,storage):
     storage.storageAll(trafficIntraday=intraday,  hourTraffic=hourTraffic, trafficMac=trafficMac, realTimeTraffic=realtime_info)

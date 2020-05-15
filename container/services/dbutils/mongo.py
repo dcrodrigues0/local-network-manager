@@ -38,6 +38,7 @@ class MongoDAO():
 
 
     # --------- GET --------
+
     def getTrafficByDay(self, date):
         return self._db.trafficIntraday.find( {"date":date})
 
@@ -46,3 +47,6 @@ class MongoDAO():
 
     def getRealTime(self):
         return self._db.realTime.find({})
+
+    def getTrafficMac(self, date):
+        return self._db.trafficMac.find( {"date":date})

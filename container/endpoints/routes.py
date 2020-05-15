@@ -32,6 +32,13 @@ def realTime():
     except:
         return  responseData("error",500,[])
 
+@routes.route('/trafficmac')
+def trafficmac():
+    try:
+        return responseData("success",200,service.getTrafficByMac(request.args.get('date',00)))
+    except:
+        return responseData("error",500,[])
+
 
 # --------------ADMIN----------------
 @routes.route('/admin/process')

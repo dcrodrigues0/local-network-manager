@@ -9,12 +9,14 @@ class Service(mongo.MongoDAO):
     def getTrafficByDate(self,date):
          return self.makeDataGraph(self.getTrafficByDay(date), 'date', 'avg')
 
-
     def getTrafficHourByDate(self, date):
         return self.makeDataGraph(self.getTrafficHour(date), 'hour', 'quantidade_pacotes')
 
     def getRealTimeService(self):
         return self.makeDataGraph(self.getRealTime(),"min","quantidade_pacotes")
+
+    def getTrafficByMac(self, date):
+        return self.makeDataGraph(self.getTrafficMac(date), 'mac_origem', 'quantidade_pacotes')
 
     def makeDataGraph(self, value, campoLabel, campoDataset):
         labels = []
