@@ -21,11 +21,11 @@ def parse(fileCap):
             timestamp = str(datetime.datetime.fromtimestamp(ts))
             packets_count+=1
             packets_length+=ip.len
-
             timestampArray = util.timestampFormat(timestamp)
-
             mac_destino = generate_mac_addr(eth.dst)
             mac_origem = generate_mac_addr(eth.src)
+
+
 
         except:
             pass
@@ -34,11 +34,15 @@ def parse(fileCap):
     hourTraffic = {"hour": timestampArray[3], "quantidade_pacotes": packets_count, "date": dateMonthDat}
     intraday = {'date':dateMonthDat,'tamanho_pacotes':packets_length, 'quantidade_pacotes':packets_count, \
                 'avg': util.formatFloat(packets_length/packets_count)}
-    savetTraffic(intraday, hourTraffic, storage)
+    trafficMac = {'date': dateMonthDat,
+                  'mac_origem': generate_mac_addr(eth.src),
+                  'quantidade_pacotes': packets_count}
+
+    savetTraffic(intraday, hourTraffic, trafficMac, storage)
     day = 0
 
-def savetTraffic(intraday, hourTraffuc, storage):
-    storage.storageAll(trafficIntraday=intraday, hourTraffic=hourTraffuc)
+def savetTraffic(intraday, hourTraffuc, traffucMac,  storage):
+    storage.storageAll(trafficIntraday=intraday,  hourTraffic=hourTraffuc, trafficMac=traffucMac)
 
 def generate_mac_addr(address):
     #Generate mac address
