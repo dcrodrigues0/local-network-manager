@@ -55,15 +55,14 @@ def trafficmac():
         return responseData("error", 500, [])
 
 
-@routes.route('/date/range')
+@routes.route('/range')
 def trafficRange():
 
     try:
+        start = request.args.get('start',00)
+        end= request.args.get('end',00)
 
-        start = request.args.get('start')
-        end= request.args.get('end')
-
-        return responseData("success",200,service.getTrafficRangeDate(start,end))
+        return responseData("success",200,service.getTrafficByRange(start,end))
     except:
         return responseData("error",500,[])
 
