@@ -7,48 +7,30 @@
         <a title="Minimizar gráfico" v-on:click="minimizeTab" href="#"><i class="fas fa-window-minimize"></i></a>
         <p class="title-graph">{{ title }}</p>
       </div>
-        <div class="size-control">
-          <a v-on:click="selectDataRange()" href="#" @click="configChart">
-              <i class="fas fa-search"></i>
-          </a>
-          <!-- <a href="#" @click="zoomChart">
-            <i class="fas fa-expand"></i>
-          </a>
-          <a href="#" @click="unzoomChart">
-            <i class="far fa-minus-square"></i>        
-          </a>-->
-          
-      </div> 
+
+      <div class="size-control">
+        <!-- <a href="#" @click="configChart">
+          <i class="fas fa-search"></i>
+        </a> -->
+        <!-- <a href="#" @click="zoomChart">
+          <i class="fas fa-expand"></i>
+        </a>
+        <a href="#" @click="unzoomChart">
+          <i class="far fa-minus-square"></i>        
+        </a> -->
+      </div>
       <!--CHART BELOW PLEASE -->
-      <ChartByRangeDate dtIni="20" dtFim="50" :style="{'width': 90%+'%', 'height':85 + '%'}"/>
+      <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->
+      <ChartByIpAddress :style="{'width': 90%+'%', 'height':85 + '%'}"/>
     </div>
   </div>
 </template>
 
 <script>
-  import ChartByRangeDate from '@/charts/ChartByRangeDate';
-  import Swal from 'sweetalert2';
-  import '@sweetalert2/theme-dark'; //para deixar a modal dark :)
-  
+  import ChartByIpAddress from '@/charts/ChartByIpAddress';
+
   export default {  
     methods: {
-      selectDataRange: function () {
-        Swal.mixin({
-          input: 'text',
-          confirmButtonText: 'Próximo &rarr;',
-          showCancelButton: true,
-          progressSteps: ['1', '2']
-          }).queue([
-            'Data de Início',
-            'Data final',
-          ]).then((result) => {
-          if (result.value) {
-            const answers = JSON.stringify(result.value)
-            console.log(answers)
-            this.$forceUpdate();
-          }
-        })
-      },
       closeTab: function () {
         if(event.target.tagName == "path"){
           let window = event.target.parentNode.parentNode.parentNode.parentNode
@@ -149,23 +131,23 @@
     },
 
     components:{
-      ChartByRangeDate
+      ChartByIpAddress
     },
     props: {
       widthProp: {
-      type: String,
-      required: true,
-      default: "350px"
-    },
+        type: String,
+        required: true,
+        default: "350px"
+      },
       heightProp: {
-      type: String,
-      required: true,
-      default: "150px"
-    },
-    title: {
-      type: String,
-      default: 'Favor colocar titulo :)'
-    },
+        type: String,
+        required: true,
+        default: "150px"
+      },
+      title: {
+        type: String,
+        default: 'Favor colocar titulo :)'
+      },
     
     },
 
@@ -223,10 +205,9 @@
   }
 
    .resizable-screen{
-    background-color: rgba(23, 23, 24, 0.801);
+    background-color: rgba(27, 26, 26, 0.856);
     margin: 5px;
     position: relative;
-    border: 1px solid rgb(66, 66, 66);
   }
 
     
