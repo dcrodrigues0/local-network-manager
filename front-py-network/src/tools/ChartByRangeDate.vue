@@ -8,9 +8,9 @@
         <p class="title-graph">{{ title }}</p>
       </div>
         <div class="size-control">
-          <!-- <a href="#" @click="configChart">
+          <a v-on:click="selectDataRange()" href="#" @click="configChart">
               <i class="fas fa-search"></i>
-          </a> -->
+          </a>
           <!-- <a href="#" @click="zoomChart">
             <i class="fas fa-expand"></i>
           </a>
@@ -20,17 +20,35 @@
           
       </div> 
       <!--CHART BELOW PLEASE -->
-      <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->
-      <Realtime :style="{'width': 90%+'%', 'height':85 + '%'}"/>
+      <ChartByRangeDate  :style="{'width': 90%+'%', 'height':85 + '%'}"/>
     </div>
   </div>
 </template>
 
 <script>
-  import Realtime from '@/charts/Realtime';
-
+  import ChartByRangeDate from '@/charts/ChartByRangeDate';
+  import Swal from 'sweetalert2';
+  import '@sweetalert2/theme-dark'; //para deixar a modal dark :)
+  
   export default {  
     methods: {
+      selectDataRange: function () {
+        Swal.mixin({
+          input: 'text',
+          confirmButtonText: 'Próximo &rarr;',
+          showCancelButton: true,
+          progressSteps: ['1', '2']
+          }).queue([
+            'Data de Início',
+            'Data final',
+          ]).then((result) => {
+          if (result.value) {
+            const answers = JSON.stringify(result.value)
+            console.log(answers)
+            this.$forceUpdate();
+          }
+        })
+      },
       closeTab: function () {
         if(event.target.tagName == "path"){
           let window = event.target.parentNode.parentNode.parentNode.parentNode
@@ -70,14 +88,17 @@
             let window = event.target.parentNode.parentNode.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
 
+            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }else if(event.target.tagName == "svg"){
             let window = event.target.parentNode.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
+            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }else if(event.target.tagName == "A"){
             let window = event.target.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
+            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }
       },
@@ -128,7 +149,7 @@
     },
 
     components:{
-      Realtime
+      ChartByRangeDate
     },
     props: {
       widthProp: {

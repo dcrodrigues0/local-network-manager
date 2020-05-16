@@ -8,15 +8,15 @@
         <p class="title-graph">{{ title }}</p>
       </div>
       <div class="size-control">
-        <a href="#" @click="zoomChart">
-          <i class="fas fa-expand"></i>
-        </a>
-        <a href="#" @click="unzoomChart">
+        <!-- <a href="#" @click="configChart">
+          <i class="fas fa-search"></i>
+        </a> -->
+        <!-- <a href="#" @click="unzoomChart">
           <i class="far fa-minus-square"></i>        
-        </a>
-        <a href="#" @click="configChart">
-          <i class="fas fa-tools"></i>
-        </a>
+        </a>-->
+        <!-- <a href="#" @click="zoomChart">
+          <i class="fas fa-expand"></i>
+        </a> -->
       </div>
       <!--CHART BELOW PLEASE -->
       <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->
@@ -231,7 +231,7 @@
      font-size:20px;
      margin-top: 5px;
      margin-right: 10px;
-     color: rgb(230, 97, 49);
+     color: #add8e6;
    }
     
     
