@@ -18,21 +18,26 @@
 # Build
  
 1 - Install required packages
-- `sudo apt-get install npm nodejs docker docker-compose python3 python-pip -y`
+- `sudo apt install npm nodejs docker docker-compose python3 python-pip`
  
 2 - Install python dependencies
-- `pip install -r requirements.txt --user`
+- `sudo pip3 install -r requirements.txt`
+-  Requirements **must be installed as super user**
 
 3 - Install front end dependencies
 - cd ./front-py-network/
 - `npm install`
 
-4 - Build docker image on root folder
+4 - Build docker image on project root folder
 - `docker-compose up`
 
-5 - Start Vue Cli Server
+5 - Start Vue Cli Server 
 - cd ./front-py-network/
 - `npm start`
+
+6 - Run server script as super user
+- Make sure your **environment variables** are valid and up to date in order to run server script
+- `sudo ./flaskStart.sh`
 
 URL Access:
 - http://localhost:8080/
