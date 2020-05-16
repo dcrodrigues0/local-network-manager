@@ -34,9 +34,9 @@ class MongoDAO():
         self._db.realTime.insert(json)
         print("Finish Insert realtime traffic")
 
-    def saveTrafficIpSrc(self, json):
+    def saveTrafficIpAddress(self, json):
         print("Start Insert packets by source ip address traffic")
-        self._db.trafficIpSrc.insert(json)
+        self._db.trafficIp.insert(json)
         print("Finish Insert packets by source ip address traffic")
 
     # --------- GET --------
@@ -53,8 +53,8 @@ class MongoDAO():
     def getTrafficMac(self, date):
         return self._db.trafficMac.find( {"date":date})
 
-    def getTrafficIpAddrSrc(self, date, hour):
-        return self._db.trafficIpSrc.find({"date": date, "hour": hour}, {"_id": 0})
+    def getTrafficIpAddress(self, date, hour):
+        return self._db.trafficIp.find({"date": date, "hour": hour})
 
     def getTrafficBetween(self):
         return self._db.trafficIntraday.find({})

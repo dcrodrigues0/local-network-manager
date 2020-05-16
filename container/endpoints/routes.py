@@ -29,12 +29,22 @@ def traffic_hour():
         return responseData("error", 500, [])
 
 
-@routes.route('/ip-addresses/src')
-def ip_addresses_traffic():
+@routes.route('/ipv4/source')
+def ipv4_source_traffic():
     try:
         date = request.args.get('date')
         hour = request.args.get('hour')
-        return responseData("success", 200, service.getIpTrafficSrc(date, hour))
+        return responseData("success", 200, service.getTrafficIp(date, hour, "Source-IPs"))
+    except:
+        return responseData("error", 500, [])
+
+
+@routes.route('/ipv4/destination')
+def ipv4_destination_traffic():
+    try:
+        date = request.args.get('date')
+        hour = request.args.get('hour')
+        return responseData("success", 200, service.getTrafficIp(date, hour, "Destination-IPs"))
     except:
         return responseData("error", 500, [])
 
@@ -57,14 +67,14 @@ def trafficmac():
 
 @routes.route('/range')
 def trafficRange():
-
     try:
-        start = request.args.get('start',00)
-        end= request.args.get('end',00)
+        start = request.args.get('start', 00)
+        end = request.args.get('end', 00)
 
-        return responseData("success",200,service.getTrafficByRange(start,end))
+        return responseData("success", 200, service.getTrafficByRange(start, end))
     except:
-        return responseData("error",500,[])
+        return responseData("error", 500, [])
+
 
 # --------------ADMIN----------------
 @routes.route('/admin/process')

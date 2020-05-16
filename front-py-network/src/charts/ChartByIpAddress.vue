@@ -10,7 +10,7 @@ export default {
     }
   },
   created(){
-    this.$http.get('http://localhost:5000/ip-addresses/src?date=14-05&hour=19')
+    this.$http.get('http://localhost:5000/ipv4/source?date=14-05&hour=19')
     .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true}))
       
   }

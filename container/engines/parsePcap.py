@@ -43,25 +43,25 @@ def parse(fileCap):
 
     hourTraffic = {"hour": timestampArray[3], "quantidade_pacotes": packets_count, "date": dateMonthDat}
 
-    intraday = {'date': dateMonthDat, 'tamanho_pacotes': packets_length, 'quantidade_pacotes': packets_count, \
+    intraday = {'date': dateMonthDat, 'tamanho_pacotes': packets_length, 'quantidade_pacotes': packets_count,
                 'avg': util.formatFloat(packets_length / packets_count)}
 
     trafficMac = {'date': dateMonthDat,
                   'mac_origem': generate_mac_addr(eth.src),
                   'quantidade_pacotes': packets_count}
 
-    packets_by_ip_address_source = {"date": dateMonthDat, "hour": timestampArray[3],
-                                    "Source-IPs": Counter(ips_source), "Destination-IPs": Counter(ips_destination)}
+    traffic_ip_address = {"date": dateMonthDat, "hour": timestampArray[3],
+                             "Source-IPs": Counter(ips_source), "Destination-IPs": Counter(ips_destination)}
 
     print()
     print("---------------------------")
     print()
-    savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, packets_by_ip_address_source, storage)
+    savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip_address, storage)
 
 
-def savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, trafficIpSource, storage):
+def savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip, storage):
     storage.storageAll(trafficIntraday=intraday, hourTraffic=hourTraffic, trafficMac=trafficMac,
-                       realTimeTraffic=realtime_info, trafficIpSource=trafficIpSource)
+                       realTimeTraffic=realtime_info, trafficIpAddress=traffic_ip)
 
 
 def generate_mac_addr(address):
