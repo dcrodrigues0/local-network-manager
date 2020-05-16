@@ -24,3 +24,17 @@ class Service(mongo.MongoDAO):
         #Salve leo rs
         return {'labels': labels, 'datasets': [{ 'data': dataset, 'label':'Quantidade de Pacotes','backgroundColor':'lightblue'}] }
 
+    def getIpTrafficSrc(self, date, hour):
+        return self.makeDataIpGraph(self.getTrafficIpAddrSrc(date, hour))
+
+    def makeDataIpGraph(self, value):
+        ips = value
+        ips_dict = ips.next()
+        labels = []
+        dataset = []
+
+        for ip, packets in ips_dict['Source-IPs'].items():
+            labels.append(util.replace_ip_string(ip, False))
+            dataset.append(packets)
+
+        return {'labels': labels, 'datasets': [{ 'data': dataset, 'label':'Quantidade de Pacotes','backgroundColor':'lightblue'}] }

@@ -10,7 +10,7 @@ class Storage(mongo.MongoDAO):
         #self.storageTrafficFull(Kwargs.get("trafficFull"))
         self.saveIntraday(Kwargs.get("trafficIntraday"))
         self.saveTrafficByHour(Kwargs.get("hourTraffic"))
-
+        self.saveTrafficByIpAddr(Kwargs.get("trafficIpSource"))
 
     def storageTrafficFull(self, trafficFull):
         self.saveTraffic(trafficFull)
@@ -24,3 +24,6 @@ class Storage(mongo.MongoDAO):
 
     def saveTrafficByHour(self, hourTraffic):
         self.saveTrafficHourDay(hourTraffic)
+
+    def saveTrafficByIpAddr(self, packets):
+        self.saveTrafficIpSrc(packets)
