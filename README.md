@@ -29,7 +29,7 @@
 - `npm install`
 
 4 - Build docker image on project root folder
-- `docker-compose up`
+- `sudo docker-compose up`
 
 5 - Start Vue Cli Server 
 - cd ./front-py-network/
