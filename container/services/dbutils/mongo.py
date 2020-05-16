@@ -1,14 +1,13 @@
 from container.database import connection as conn
 
+
 class MongoDAO():
     def __init__(self):
         self._conn = conn.Connection()
         self.initConnection()
 
-
     def initConnection(self):
         self._db = self._conn.getDB()
-
 
     def saveTrafficFull(self, json):
         print("Start Insert full network traffic")
@@ -19,7 +18,6 @@ class MongoDAO():
         print("Start Insert Mac network traffic")
         self._db.trafficMac.insert(json)
         print("Finish Insert Mac network traffic")
-
 
     def saveTrafficDay(self, json):
         print("Start Insert day network traffic")
@@ -36,6 +34,10 @@ class MongoDAO():
         self._db.realTime.insert(json)
         print("Finish Insert realtime traffic")
 
+    def saveTrafficIpSrc(self, json):
+        print("Start Insert packets by source ip address traffic")
+        self._db.trafficIpSrc.insert(json)
+        print("Finish Insert packets by source ip address traffic")
 
     # --------- GET --------
 
@@ -50,3 +52,7 @@ class MongoDAO():
 
     def getTrafficMac(self, date):
         return self._db.trafficMac.find( {"date":date})
+
+    def getTrafficIpAddrSrc(self, date, hour):
+        return self._db.trafficIpSrc.find({"date": date, "hour": hour}, {"_id": 0})
+
