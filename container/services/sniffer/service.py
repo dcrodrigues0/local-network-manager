@@ -18,6 +18,22 @@ class Service(mongo.MongoDAO):
     def getTrafficByMac(self, date):
         return self.makeDataGraph(self.getTrafficMac(date), 'mac_origem', 'quantidade_pacotes')
 
+    def getTrafficByRange(self, start,end):
+
+        start = start.split("-")
+        end = end.split("-")
+
+        contentField = self.getTrafficBetween()
+        traffic = []
+
+        for content in contentField:
+            if content["date"].split("-")[1] >= start[1] and content["date"].split("-")[1] <= end[1]:
+                if content["date"].split("-")[0] >= start[0] and content["date"].split("-")[0] <= end[0]:
+                    traffic.append(content)
+
+        return self.makeDataGraph(traffic,'date','quantidade_pacotes')
+
+
     def makeDataGraph(self, value, campoLabel, campoDataset):
         labels = []
         dataset = []
@@ -27,6 +43,7 @@ class Service(mongo.MongoDAO):
             dataset.append(doc[campoDataset])
         #Salve leo rs
         return {'labels': labels, 'datasets': [{ 'data': dataset, 'label':'Quantidade de Pacotes','backgroundColor':'lightblue'}] }
+
 
     def getIpTrafficSrc(self, date, hour):
         return self.makeDataIpGraph(self.getTrafficIpAddrSrc(date, hour))

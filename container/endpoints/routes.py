@@ -55,6 +55,18 @@ def trafficmac():
         return responseData("error", 500, [])
 
 
+@routes.route('/date/range')
+def trafficRange():
+
+    try:
+
+        start = request.args.get('start')
+        end= request.args.get('end')
+
+        return responseData("success",200,service.getTrafficRangeDate(start,end))
+    except:
+        return responseData("error",500,[])
+
 # --------------ADMIN----------------
 @routes.route('/admin/process')
 def execProcess():

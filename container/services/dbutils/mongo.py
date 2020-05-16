@@ -56,3 +56,6 @@ class MongoDAO():
     def getTrafficIpAddrSrc(self, date, hour):
         return self._db.trafficIpSrc.find({"date": date, "hour": hour}, {"_id": 0})
 
+    def getTrafficBetween(self):
+        return self._db.trafficIntraday.find({})
+
