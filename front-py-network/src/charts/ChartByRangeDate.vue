@@ -8,8 +8,17 @@
                 dataChart:null
             }
         },
+        props:{
+          dtIni: {
+            type: String,
+            required: true
+          },
+          dtFim: {
+            type: String,
+            required: true
+          },
+        },
         mounted(){
-            
             this.$http.get('http://localhost:5000/date/hour?date=07-05')
             .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true}))
         }
