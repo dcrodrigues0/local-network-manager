@@ -11,12 +11,12 @@
         <a v-on:click="selectDataRange()" href="#" @click="configChart">
           <i class="fas fa-search"></i>
         </a>
-        <!-- <a href="#" @click="unzoomChart">
+        <a href="#" @click="unzoomChart">
           <i class="far fa-minus-square"></i>        
-        </a>-->
-        <!-- <a href="#" @click="zoomChart">
+        </a>
+        <a href="#" @click="zoomChart">
           <i class="fas fa-expand"></i>
-        </a> -->
+        </a>
       </div>
       <!--CHART BELOW PLEASE -->
       <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->

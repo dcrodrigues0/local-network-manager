@@ -54,7 +54,7 @@ class Service(mongo.MongoDAO):
             i += 1
 
         return {'labels': labels,
-                'datasets': [{'data': dataset, 'label': subtitle, exibition: 'powderblue' if exibition == 'borderColor' else colors}]}
+                'datasets': [{'data': dataset, 'label': subtitle, exibition: 'powderblue', 'backgroundColor':'rgba(176, 224, 230, 0.2)' if exibition == 'borderColor' else colors}]}
 
     def getTrafficIp(self, date, hour, direction, exibition,subtitle):
         return self.makeDataIpGraph(self.getTrafficIpAddress(date, hour), direction, exibition,subtitle)
@@ -81,4 +81,4 @@ class Service(mongo.MongoDAO):
             i += 1
 
         return {'labels': labels,
-                'datasets': [{'data': dataset, 'label': subtitle, exibition: 'powderblue' if exibition == 'borderColor' else colors}]}
+                'datasets': [{'data': dataset, 'label': subtitle, exibition: 'powderblue', 'backgroundColor':'rgba(176, 224, 230, 0.2)' if exibition == 'borderColor' else colors}]}

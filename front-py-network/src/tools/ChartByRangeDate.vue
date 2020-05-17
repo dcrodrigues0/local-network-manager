@@ -11,6 +11,12 @@
         <a v-on:click="selectDataRange()" href="#" @click="configChart">
             <i class="fas fa-search"></i>
         </a>
+        <a href="#" @click="zoomChart">
+          <i class="fas fa-expand"></i>
+        </a>
+        <a href="#" @click="unzoomChart">
+          <i class="far fa-minus-square"></i>        
+        </a>
       </div> 
       <!--CHART BELOW PLEASE -->
       <ChartByRangeDate v-if="createGraphByFilter()" :dtIni="this.dtIni" :dtFim="this.dtFim" :style="{'width': 90%+'%', 'height':85 + '%'}"/>
