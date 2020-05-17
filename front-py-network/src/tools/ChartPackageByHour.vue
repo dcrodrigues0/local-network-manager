@@ -1,6 +1,6 @@
 <template>
   <div class="root">
-    <div id="chartPlace" v-bind:style="{'width':widthProp,'height':heightProp}" class="resizable-screen">
+    <div v-bind:style="{'width':widthProp,'height':heightProp}" class="resizable-screen">
       <div class="tools-tab">
         <a title="Fechar gráfico" v-on:click="closeTab" href="#"><i class="far fa-window-close"></i></a>
         <a title="Maximizar gráfico" v-on:click="maximizeTab" href="#"><i class="far fa-window-restore"></i></a>
@@ -9,25 +9,32 @@
       </div>
       <div class="size-control">
         <a v-on:click="selectDataRange()" href="#" @click="configChart">
-            <i class="fas fa-search"></i>
+          <i class="fas fa-search"></i>
         </a>
-      </div> 
+        <!-- <a href="#" @click="unzoomChart">
+          <i class="far fa-minus-square"></i>        
+        </a>-->
+        <!-- <a href="#" @click="zoomChart">
+          <i class="fas fa-expand"></i>
+        </a> -->
+      </div>
       <!--CHART BELOW PLEASE -->
-      <ChartByRangeDate v-if="createGraphByFilter()" :dtIni="this.dtIni" :dtFim="this.dtFim" :style="{'width': 90%+'%', 'height':85 + '%'}"/>
+      <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->
+      <Bar v-if="createGraphByFilter()" :dtIni="this.dtIni" :style="{'width': 90%+'%', 'height':85 + '%'}"/>
     </div>
   </div>
 </template>
 
 <script>
-  import ChartByRangeDate from '@/charts/ChartByRangeDate';
+  import Bar from '@/charts/ChartPackageByHour';
   import Swal from 'sweetalert2';
   import '@sweetalert2/theme-dark'; //para deixar a modal dark :)
-  
+
   export default {  
     methods: {
-      
+
       createGraphByFilter: function (){
-        if(this.dtIni && this.dtFim){
+        if(this.dtIni){
           return true;
         }else{
           return false;
@@ -36,21 +43,18 @@
 
       selectDataRange: function () {
         this.dtIni = "";
-        this.dtFim = "";
         Swal.mixin({
           input: 'text',
-          confirmButtonText: 'Próximo &rarr;',
           inputPlaceholder:'Ex:07-05',
+          confirmButtonText: 'Próximo &rarr;',
           showCancelButton: true,
-          progressSteps: ['1', '2']
+          progressSteps: ['1']
           }).queue([
-            'Data de Início',
-            'Data final',
+            'Data',
           ]).then((result) => {
           if (result.value) {
             const answers = result.value;
             this.dtIni = answers[0];
-            this.dtFim = answers[1];
           }
         })
       },
@@ -72,21 +76,17 @@
         if(event.target.tagName == "path"){
           let window = event.target.parentNode.parentNode.parentNode.parentNode
           window.childNodes[1].style.display = 'none'
-          
-          window.parentNode.className = 'root'
+        
           document.querySelector('.bottomBar').appendChild(window.parentNode);
         }else if(event.target.tagName == "svg"){
           let window = event.target.parentNode.parentNode.parentNode
           window.childNodes[1].style.display = 'none'
 
-          window.parentNode.className = 'root'
           document.querySelector('.bottomBar').appendChild(window.parentNode);
-
         }else if(event.target.tagName == "A"){
           let window = event.target.parentNode.parentNode
           window.childNodes[1].style.display = 'none'
 
-          window.parentNode.className = 'root'
           document.querySelector('.bottomBar').appendChild(window.parentNode);
         }
       },
@@ -96,17 +96,14 @@
             let window = event.target.parentNode.parentNode.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
 
-            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }else if(event.target.tagName == "svg"){
             let window = event.target.parentNode.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
-            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }else if(event.target.tagName == "A"){
             let window = event.target.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
-            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }
       },
@@ -153,13 +150,12 @@
         return {
           dataGraph: null,
           response: "",
-          dtIni:"07-05",
-          dtFim:"15-05"
+          dtIni:"07-05"
       }
     },
 
     components:{
-      ChartByRangeDate
+      Bar
     },
     props: {
       widthProp: {

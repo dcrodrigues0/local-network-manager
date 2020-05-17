@@ -7,26 +7,27 @@
         <a title="Minimizar gráfico" v-on:click="minimizeTab" href="#"><i class="fas fa-window-minimize"></i></a>
         <p class="title-graph">{{ title }}</p>
       </div>
+
       <div class="size-control">
         <!-- <a href="#" @click="configChart">
           <i class="fas fa-search"></i>
         </a> -->
-        <!-- <a href="#" @click="unzoomChart">
-          <i class="far fa-minus-square"></i>        
-        </a>-->
         <!-- <a href="#" @click="zoomChart">
           <i class="fas fa-expand"></i>
+        </a>
+        <a href="#" @click="unzoomChart">
+          <i class="far fa-minus-square"></i>        
         </a> -->
       </div>
       <!--CHART BELOW PLEASE -->
       <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->
-      <Bar :style="{'width': 90%+'%', 'height':85 + '%'}"/>
+      <ChartByIpAddress :style="{'width': 90%+'%', 'height':85 + '%'}"/>
     </div>
   </div>
 </template>
 
 <script>
-  import Bar from '@/charts/Bar';
+  import ChartByIpAddress from '@/charts/ChartByIpAddressDestination.vue';
 
   export default {  
     methods: {
@@ -46,17 +47,21 @@
         if(event.target.tagName == "path"){
           let window = event.target.parentNode.parentNode.parentNode.parentNode
           window.childNodes[1].style.display = 'none'
-        
+          
+          window.parentNode.className = 'root'
           document.querySelector('.bottomBar').appendChild(window.parentNode);
         }else if(event.target.tagName == "svg"){
           let window = event.target.parentNode.parentNode.parentNode
           window.childNodes[1].style.display = 'none'
 
+          window.parentNode.className = 'root'
           document.querySelector('.bottomBar').appendChild(window.parentNode);
+
         }else if(event.target.tagName == "A"){
           let window = event.target.parentNode.parentNode
           window.childNodes[1].style.display = 'none'
 
+          window.parentNode.className = 'root'
           document.querySelector('.bottomBar').appendChild(window.parentNode);
         }
       },
@@ -65,14 +70,17 @@
             let window = event.target.parentNode.parentNode.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
 
+            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }else if(event.target.tagName == "svg"){
             let window = event.target.parentNode.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
+            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }else if(event.target.tagName == "A"){
             let window = event.target.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
+            window.parentNode.className = 'root col-md-6 col-12 mt-3'
             document.querySelector('.graphs').appendChild(window.parentNode);
           }
       },
@@ -123,23 +131,23 @@
     },
 
     components:{
-      Bar
+      ChartByIpAddress
     },
     props: {
       widthProp: {
-      type: String,
-      required: true,
-      default: "350px"
-    },
+        type: String,
+        required: true,
+        default: "350px"
+      },
       heightProp: {
-      type: String,
-      required: true,
-      default: "150px"
-    },
-    title: {
-      type: String,
-      default: 'Favor colocar titulo :)'
-    },
+        type: String,
+        required: true,
+        default: "150px"
+      },
+      title: {
+        type: String,
+        default: 'Favor colocar titulo :)'
+      },
     
     },
 
@@ -197,10 +205,9 @@
   }
 
    .resizable-screen{
-    background-color: rgba(23, 23, 24, 0.801);
+    background-color: rgba(27, 26, 26, 0.856);
     margin: 5px;
     position: relative;
-    border: 1px solid rgb(66, 66, 66);
   }
 
     

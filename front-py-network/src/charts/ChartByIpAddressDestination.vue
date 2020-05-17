@@ -10,8 +10,8 @@ export default {
     }
   },
   created(){
-    this.$http.get('http://localhost:5000/date/hour?date=07-05')
-      .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true}))
+    this.$http.get('http://localhost:5000/ipv4/destination?date=14-05&hour=19')
+    .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true}))
       
   }
 }

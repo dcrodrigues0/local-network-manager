@@ -12,7 +12,7 @@
             setInterval(() => {
                 this.$http.get('http://localhost:5000/realtime')
                 .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true}))
-            }, 60000);
+            }, 30000);
         }
     }
 
