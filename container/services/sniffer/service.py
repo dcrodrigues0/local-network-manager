@@ -56,8 +56,8 @@ class Service(mongo.MongoDAO):
         return {'labels': labels,
                 'datasets': [{'data': dataset, 'label': subtitle, exibition: colors}]}
 
-    def getTrafficIp(self, date, hour, direction):
-        return self.makeDataIpGraph(self.getTrafficIpAddress(date, hour), direction)
+    def getTrafficIp(self, date, hour, direction, exibition,subtitle):
+        return self.makeDataIpGraph(self.getTrafficIpAddress(date, hour), direction, exibition,subtitle)
 
 
     def makeDataIpGraph(self, value, direction,exibition, subtitle):
