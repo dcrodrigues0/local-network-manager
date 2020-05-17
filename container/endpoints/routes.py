@@ -11,9 +11,9 @@ service = service.Service()
 def intraday():
     try:
         exibition = request.args.get('exibition')
-        subittle = request.args.get('subittle')
+        subtitle = request.args.get('subtitle')
 
-        return responseData("success", 200, service.getTrafficByDate(request.args.get('date', 00), exibition,subittle))
+        return responseData("success", 200, service.getTrafficByDate(request.args.get('date', 00), exibition,subtitle))
     except:
         return responseData("error", 500, [])
 
@@ -22,9 +22,9 @@ def intraday():
 def traffic_hour():
     try:
         exibition = request.args.get('exibition')
-        subittle = request.args.get('subittle')
+        subtitle = request.args.get('subtitle')
 
-        return responseData("success", 200, service.getTrafficHourByDate(request.args.get('date', 00),exibition,subittle))
+        return responseData("success", 200, service.getTrafficHourByDate(request.args.get('date', 00),exibition,subtitle))
     except:
         return responseData("error", 500, [])
 
@@ -35,9 +35,9 @@ def ipv4_source_traffic():
         date = request.args.get('date')
         hour = request.args.get('hour')
         exibition = request.args.get('exibition')
-        subittle = request.args.get('subittle')
+        subtitle = request.args.get('subtitle')
 
-        return responseData("success", 200, service.getTrafficIp(date, hour, "Source-IPs",exibition,subittle))
+        return responseData("success", 200, service.getTrafficIp(date, hour, "Source-IPs",exibition,subtitle))
     except:
         return responseData("error", 500, [])
 
@@ -48,9 +48,9 @@ def ipv4_destination_traffic():
         date = request.args.get('date')
         hour = request.args.get('hour')
         exibition = request.args.get('exibition')
-        subittle = request.args.get('subittle')
+        subtitle = request.args.get('subtitle')
 
-        return responseData("success", 200, service.getTrafficIp(date, hour, "Destination-IPs",exibition,subittle))
+        return responseData("success", 200, service.getTrafficIp(date, hour, "Destination-IPs",exibition,subtitle))
     except:
         return responseData("error", 500, [])
 
@@ -59,9 +59,9 @@ def ipv4_destination_traffic():
 def realTime():
     try:
         exibition = request.args.get('exibition')
-        subittle = request.args.get('subittle')
+        subtitle = request.args.get('subtitle')
 
-        return responseData("success", 200, service.getRealTimeService(exibition,subittle))
+        return responseData("success", 200, service.getRealTimeService(exibition,subtitle))
     except:
         return responseData("error", 500, [])
 
@@ -70,9 +70,9 @@ def realTime():
 def trafficmac():
     try:
         exibition = request.args.get('exibition')
-        subittle = request.args.get('subittle')
+        subtitle = request.args.get('subtitle')
 
-        return responseData("success", 200, service.getTrafficByMacAddress( request.args.get('date', 00),exibition,subittle))
+        return responseData("success", 200, service.getTrafficByMacAddress( request.args.get('date', 00),exibition,subtitle))
     except:
         return responseData("error", 500, [])
 
@@ -81,11 +81,11 @@ def trafficmac():
 def trafficRange():
     try:
         exibition = request.args.get('exibition')
-        subittle = request.args.get('subittle')
+        subtitle = request.args.get('subtitle')
         start = request.args.get('start', 00)
         end = request.args.get('end', 00)
 
-        return responseData("success", 200, service.getTrafficByRange(start, end, exibition,subittle))
+        return responseData("success", 200, service.getTrafficByRange(start, end, exibition,subtitle))
     except:
         return responseData("error", 500, [])
 
