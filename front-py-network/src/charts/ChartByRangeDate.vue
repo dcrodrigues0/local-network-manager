@@ -20,8 +20,8 @@
             default:'15-05'
           },
         },
-        mounted(){
-          this.$http.get(`http://localhost:5000/range?start=${this.dtIni}&end=${this.dtFim}`)
+        mounted(){        
+          this.$http.get(`http://localhost:5000/range?start=${this.dtIni}&end=${this.dtFim}&exibition=backgroundColor&subtitle=Quantidade De Pacotes`)
           .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true}))
         }
     }

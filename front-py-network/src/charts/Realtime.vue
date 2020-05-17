@@ -10,7 +10,7 @@
         },
         mounted(){
             setInterval(() => {
-                this.$http.get('http://localhost:5000/realtime')
+                this.$http.get('http://localhost:5000/realtime?exibition=borderColor&subtitle=Quantidade De Pacotes')
                 .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true}))
             }, 30000);
         }
