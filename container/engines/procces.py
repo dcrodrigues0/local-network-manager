@@ -34,3 +34,6 @@ def read(filepath):
 
 def addQueue(filepath):
     queue.append(filepath)
+
+def addEnvOnQueue():
+    addQueue(fileSrc)

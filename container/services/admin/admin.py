@@ -1,5 +1,6 @@
-from container.engines.procces import proccess
+from container.engines import procces
 
 #Inicia o procesos de read and parse do arquivo
 def startProcess():
-    proccess()
+    procces.addEnvOnQueue()
+    procces.proccess()
