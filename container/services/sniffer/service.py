@@ -2,6 +2,7 @@ from container.services.dbutils import mongo
 from container.util import util
 
 
+
 class Service(mongo.MongoDAO):
     def __init__(self):
         mongo.MongoDAO.__init__(self)
@@ -37,26 +38,48 @@ class Service(mongo.MongoDAO):
     def makeDataGraph(self, value, campoLabel, campoDataset):
         labels = []
         dataset = []
+        colorsAvaliable = ['powderblue', 'lightblue', 'lightskyblue', 'skyblue', 'deepskyblue', 'lightsteelblue',
+                           'dodgerblue', 'cornflowerblue',
+                           'steelblue', 'royalblue', 'blue', 'mediumblue', 'darkblue', 'navy', 'midnightblue',
+                           'mediumslateblue', 'slateblue', 'darkslateblue', 'lavender', 'gainsboro', 'azure']
+        colors = []
+        i = 0
 
         for doc in value:
             labels.append(doc[campoLabel])
             dataset.append(doc[campoDataset])
-        # Salve leo rs
+            colors.append(colorsAvaliable[i])
+            if (i == 20):
+                i = 0
+            i += 1
+
+
         return {'labels': labels,
-                'datasets': [{'data': dataset, 'label': 'Quantidade de Pacotes', 'backgroundColor': 'lightblue'}]}
+                'datasets': [{'data': dataset, 'label': 'Quantidade de Pacotes', 'backgroundColor': colors}]}
 
     def getTrafficIp(self, date, hour, direction):
         return self.makeDataIpGraph(self.getTrafficIpAddress(date, hour), direction)
+
 
     def makeDataIpGraph(self, value, direction):
         ips = value
         ips_dict = ips.next()
         labels = []
         dataset = []
+        colorsAvaliable = ['powderblue', 'lightblue', 'lightskyblue', 'skyblue', 'deepskyblue', 'lightsteelblue',
+                           'dodgerblue', 'cornflowerblue',
+                           'steelblue', 'royalblue', 'blue', 'mediumblue', 'darkblue', 'navy', 'midnightblue',
+                           'mediumslateblue', 'slateblue', 'darkslateblue', 'lavender', 'gainsboro', 'azure']
+        colors = []
+        i = 0
 
         for ip, packets in ips_dict[direction].items():
             labels.append(util.replace_ip_string(ip, False))
             dataset.append(packets)
+            colors.append(colorsAvaliable[i])
+            if (i == 20):
+                i = 0
+            i += 1
 
         return {'labels': labels,
-                'datasets': [{'data': dataset, 'label': 'Quantidade de Pacotes', 'backgroundColor': 'lightblue'}]}
+                'datasets': [{'data': dataset, 'label': 'Quantidade de Pacotes', 'backgroundColor': colors}]}
