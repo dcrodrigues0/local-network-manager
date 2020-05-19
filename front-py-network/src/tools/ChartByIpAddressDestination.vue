@@ -9,15 +9,19 @@
       </div>
 
       <div class="size-control">
-        <!-- <a href="#" @click="configChart">
-          <i class="fas fa-search"></i>
-        </a> -->
-        <a href="#" @click="zoomChart">
-          <i class="fas fa-expand"></i>
-        </a>
-        <a href="#" @click="unzoomChart">
-          <i class="far fa-minus-square"></i>        
-        </a>
+        <div>
+          <a href="#" @click="$bvModal.show('my-modal')" id='chart-ip-address-d' class='zoom'>
+            <i class="fas fa-expand"></i>
+          </a>
+        </div>
+        <div>
+          <a href="#" @click="zoomChart">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+          <a href="#" @click="unzoomChart">
+            <i class="far fa-minus-square"></i>        
+          </a>
+        </div>
       </div>
       <!--CHART BELOW PLEASE -->
       <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->
@@ -32,32 +36,15 @@
   export default {  
     methods: {
       closeTab: function () {
-        if(event.target.tagName == "path"){
-          let window = event.target.parentNode.parentNode.parentNode.parentNode
-          window.style.display = "none"
-        }else if(event.target.tagName == "svg"){
-          let window = event.target.parentNode.parentNode.parentNode
-          window.style.display = "none"
-        }else if(event.target.tagName == "A"){
+
+      if(event.target.tagName == "A"){
           let window = event.target.parentNode.parentNode
           window.style.display = "none"
         }
       },
+
       minimizeTab: function () {
-        if(event.target.tagName == "path"){
-          let window = event.target.parentNode.parentNode.parentNode.parentNode
-          window.childNodes[1].style.display = 'none'
-          
-          window.parentNode.className = 'root'
-          document.querySelector('.bottomBar').appendChild(window.parentNode);
-        }else if(event.target.tagName == "svg"){
-          let window = event.target.parentNode.parentNode.parentNode
-          window.childNodes[1].style.display = 'none'
-
-          window.parentNode.className = 'root'
-          document.querySelector('.bottomBar').appendChild(window.parentNode);
-
-        }else if(event.target.tagName == "A"){
+        if(event.target.tagName == "A"){
           let window = event.target.parentNode.parentNode
           window.childNodes[1].style.display = 'none'
 
@@ -65,19 +52,9 @@
           document.querySelector('.bottomBar').appendChild(window.parentNode);
         }
       },
-      maximizeTab: function (){
-        if(event.target.tagName == "path"){
-            let window = event.target.parentNode.parentNode.parentNode.parentNode
-            window.childNodes[1].style.display = 'flex'
 
-            window.parentNode.className = 'root col-md-6 col-12 mt-3'
-            document.querySelector('.graphs').appendChild(window.parentNode);
-          }else if(event.target.tagName == "svg"){
-            let window = event.target.parentNode.parentNode.parentNode
-            window.childNodes[1].style.display = 'flex'
-            window.parentNode.className = 'root col-md-6 col-12 mt-3'
-            document.querySelector('.graphs').appendChild(window.parentNode);
-          }else if(event.target.tagName == "A"){
+      maximizeTab: function (){
+          if(event.target.tagName == "A"){
             let window = event.target.parentNode.parentNode
             window.childNodes[1].style.display = 'flex'
             window.parentNode.className = 'root col-md-6 col-12 mt-3'
@@ -86,7 +63,7 @@
       },
       
       zoomChart: function(){
-        let obj = event.target.parentNode.parentNode.parentNode.parentNode;
+        let obj = event.target.parentNode.parentNode.parentNode;        
 
         if( obj.className.indexOf('col') !== -1){          
           obj.className = 'root col-12 fullscreen mt-3'
@@ -97,7 +74,7 @@
       },
 
       unzoomChart: function(){
-        let obj = event.target.parentNode.parentNode.parentNode.parentNode;
+        let obj = event.target.parentNode.parentNode.parentNode;
 
         if( obj.className.indexOf('col') !== -1){          
           obj.className = 'root col-12 col-md-6  normalscreen mt-3'
@@ -235,7 +212,7 @@
    }
 
    .size-control a{
-     font-size:20px;
+     font-size: 16px;
      margin-top: 5px;
      margin-right: 10px;
      color: #add8e6;
