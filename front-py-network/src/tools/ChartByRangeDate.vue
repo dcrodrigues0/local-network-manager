@@ -47,7 +47,9 @@
           input: 'text',
           confirmButtonText: 'Próximo &rarr;',
           inputPlaceholder:'Ex:07-05',
-          showCancelButton: true,
+          showCancelButton: false,
+          allowOutsideClick:false,
+          allowEscapeKey:false,
           progressSteps: ['1', '2']
           }).queue([
             'Data de Início',

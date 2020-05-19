@@ -11,22 +11,22 @@
         <a v-on:click="selectDataRange()" href="#" @click="configChart">
           <i class="fas fa-search"></i>
         </a>
-        <a href="#" @click="unzoomChart">
-          <i class="far fa-minus-square"></i>        
-        </a>
         <a href="#" @click="zoomChart">
           <i class="fas fa-expand"></i>
+        </a>
+        <a href="#" @click="unzoomChart">
+          <i class="far fa-minus-square"></i>        
         </a>
       </div>
       <!--CHART BELOW PLEASE -->
       <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->
-      <Bar v-if="createGraphByFilter()" :dtIni="this.dtIni" :style="{'width': 90%+'%', 'height':85 + '%'}"/>
+      <ChartByTrafficMac v-if="createGraphByFilter()" :dtIni="this.dtIni" :style="{'width': 90%+'%', 'height':85 + '%'}"/>
     </div>
   </div>
 </template>
 
 <script>
-  import Bar from '@/charts/ChartPackageByHour';
+  import ChartByTrafficMac from '@/charts/ChartByTrafficMac';
   import Swal from 'sweetalert2';
   import '@sweetalert2/theme-dark'; //para deixar a modal dark :)
 
@@ -152,12 +152,12 @@
         return {
           dataGraph: null,
           response: "",
-          dtIni:"07-05"
+          dtIni:"14-05"
       }
     },
 
     components:{
-      Bar
+      ChartByTrafficMac
     },
     props: {
       widthProp: {
