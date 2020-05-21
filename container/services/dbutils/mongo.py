@@ -39,23 +39,42 @@ class MongoDAO():
         self._db.trafficIp.insert(json)
         print("Finish Insert packets by source ip address traffic")
 
+    def updateIntradayMongo(self, id, json):
+        print("Update intraday")
+        self._db.trafficIntraday.update(
+            {"_id": id},
+            {"$set":
+                 {"quantidade_pacotes": json["quantidade_pacotes"],
+                  "tamanho_pacotes": json["tamanho_pacotes"],
+                  "avg": json["avg"]},
+             }, upsert=True)
+
+    def updateHourMongo(self,json):
+        print("Update intraday")
+        self._db.trafficHour.update(
+            {"_id": json['_id']},
+            {"$set":
+                 {"quantidade_pacotes": json["quantidade_pacotes"]},
+             }, upsert=True)
+
+
+
     # --------- GET --------
 
     def getTrafficByDay(self, date):
-        return self._db.trafficIntraday.find( {"date":date})
+        return self._db.trafficIntraday.find({"date": date})
 
     def getTrafficHour(self, date):
-        return self._db.trafficHour.find( {"date":date})
+        return self._db.trafficHour.find({"date": date})
 
     def getRealTime(self):
         return self._db.realTime.find({})
 
     def getTrafficMac(self, date):
-        return self._db.trafficMac.find( {"date":date})
+        return self._db.trafficMac.find({"date": date})
 
     def getTrafficIpAddress(self, date, hour):
         return self._db.trafficIp.find({"date": date, "hour": hour})
 
     def getTrafficBetween(self):
         return self._db.trafficIntraday.find({})
-
