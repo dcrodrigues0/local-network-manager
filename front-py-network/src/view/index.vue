@@ -17,9 +17,6 @@
             <router-link title="My network package statistics" to="/view1" class="main-icons">
               <i class="fas fa-wifi"></i>
             </router-link>
-            <router-link title="MAC Statistics" to="/view2" class="main-icons">
-              <i class="fas fa-chart-pie"></i>
-            </router-link>
         </div>
 
     </main>
@@ -153,6 +150,27 @@ export default {
      .graphs{
        margin-left: 0px;
      }
+  }
+
+  .modal-body{
+    padding: 0!important;
+  }
+
+  .modal-body > div > .root{
+    margin-top: 0!important;
+    padding: 0!important;
+  }
+
+  .modal-body > div > .root > .resizable-screen{
+    margin: 0!important;
+  }
+
+  .modal-header{
+    display: none!important;
+  }
+
+  .modal-footer{
+    display: none!important;
   }
 
 

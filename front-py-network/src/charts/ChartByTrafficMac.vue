@@ -1,8 +1,8 @@
 <script>
-import { Scatter } from 'vue-chartjs'
+import { HorizontalBar } from 'vue-chartjs'
 
 export default {
-  extends: Scatter,
+  extends: HorizontalBar,
   
   data (){
     return{
@@ -17,7 +17,7 @@ export default {
     },
   },
   mounted(){
-    this.$http.get(`http://localhost:5000/date/hour?date=${this.dtIni}&exibition=backgroundColor&subtitle=Quantidade de pacotes`)
+    this.$http.get(`http://localhost:5000/trafficmac?date=${this.dtIni}&exibition=backgroundColor&subtitle=QuantidadeDePacotes`)
       .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true}))
       
   }

@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 import Main from '@/components/Main.vue'
 import View1 from '@/components/view1.vue'
-import View2 from '@/components/view2.vue'
 
 Vue.use(VueRouter)
 
@@ -18,11 +17,6 @@ const routes = [
         path: '/view1',
         name: 'View1',
         component: View1
-    },
-    {
-        path: '/view2',
-        name: 'View2',
-        component: View2
     }
 ]
 
