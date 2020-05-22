@@ -49,7 +49,7 @@ class MongoDAO():
                   "avg": json["avg"]},
              }, upsert=True)
 
-    def updateHourMongo(self,json):
+    def updateHourMongo(self, json):
         print("Update intraday")
         self._db.trafficHour.update(
             {"_id": json['_id']},
@@ -57,7 +57,14 @@ class MongoDAO():
                  {"quantidade_pacotes": json["quantidade_pacotes"]},
              }, upsert=True)
 
-
+    def updateTrafficByIpAddr(self, id, json):
+        print("Update Source-IPs")
+        self._db.trafficIp.update(
+            {"_id": id},
+            {"$set":
+                 {"Source-IPs": json["Source-IPs"],
+                  "Destination-IPs": json["Destination-IPs"]},
+             })
 
     # --------- GET --------
 
