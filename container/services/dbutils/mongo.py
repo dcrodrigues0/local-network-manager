@@ -35,9 +35,9 @@ class MongoDAO():
         print("Finish Insert realtime traffic")
 
     def saveTrafficIpAddress(self, json):
-        print("Start Insert packets by source ip address traffic")
+        print("Start Insert packets by IP address traffic")
         self._db.trafficIp.insert(json)
-        print("Finish Insert packets by source ip address traffic")
+        print("Finish Insert packets by IP address traffic")
 
     def updateIntradayMongo(self, id, json):
         print("Update intraday")
@@ -49,15 +49,22 @@ class MongoDAO():
                   "avg": json["avg"]},
              }, upsert=True)
 
-    def updateHourMongo(self,json):
-        print("Update intraday")
+    def updateHourMongo(self, json):
+        print("Update Hour")
         self._db.trafficHour.update(
             {"_id": json['_id']},
             {"$set":
                  {"quantidade_pacotes": json["quantidade_pacotes"]},
              }, upsert=True)
 
-
+    def updateTrafficByIpAddr(self, id, json):
+        print("Update IP Addresses")
+        self._db.trafficIp.update(
+            {"_id": id},
+            {"$set":
+                 {"Source-IPs": json["Source-IPs"],
+                  "Destination-IPs": json["Destination-IPs"]},
+             })
 
     # --------- GET --------
 
