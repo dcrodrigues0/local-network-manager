@@ -17,23 +17,32 @@ def parse(fileCap):
     hourTraffic = {}
     ips_destination = []
     ips_source = []
-
+    traffic_table = []
     for ts, buf in fileCap:
         try:
             eth = dpkt.ethernet.Ethernet(buf)
             ip = eth.data
+            proto = ip.data
 
             timestamp = str(datetime.datetime.fromtimestamp(ts))
+            timestampArray = util.timestampFormat(timestamp)
             packets_count += 1
             packets_length += ip.len
 
-            timestampArray = util.timestampFormat(timestamp)
-            mac_destino = generate_mac_addr(eth.dst)
-            mac_origem = generate_mac_addr(eth.src)
+            source_ip = util.replace_ip_string(inet_to_str(ip.src))
+            destination_ip = util.replace_ip_string(inet_to_str(ip.dst))
 
-            ips_source.append(util.replace_ip_string(inet_to_str(ip.src)))
-            ips_destination.append(util.replace_ip_string(inet_to_str(ip.dst)))
+            ips_source.append(source_ip)
+            ips_destination.append(destination_ip)
 
+            protocol = ip.get_proto(ip.p).__name__
+            source_port = proto.sport
+            destination_port = proto.dport
+
+            table_record = {"Source-IP": str(source_ip) + ":" + str(source_port),
+                            "Destination-IP": str(destination_ip) + ":" + str(destination_port),
+                            "Protocol": protocol, "Length": ip.len, "TTL": ip.ttl}
+            traffic_table.append(table_record)
         except:
             pass
 
@@ -51,17 +60,20 @@ def parse(fileCap):
                   'quantidade_pacotes': packets_count}
 
     traffic_ip_address = {"date": dateMonthDat, "hour": timestampArray[3],
-                             "Source-IPs": Counter(ips_source), "Destination-IPs": Counter(ips_destination)}
+                          "Source-IPs": Counter(ips_source), "Destination-IPs": Counter(ips_destination)}
+
+    realtime_table = {"date": dateMonthDat, "hour": timestampArray[3], "min": timestampArray[4],
+                      "Traffic": traffic_table}
 
     print()
     print("---------------------------")
     print()
-    savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip_address, storage)
+    savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip_address, realtime_table, storage)
 
 
-def savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip, storage):
+def savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip, trafficTable, storage):
     storage.storageAll(trafficIntraday=intraday, hourTraffic=hourTraffic, trafficMac=trafficMac,
-                       realTimeTraffic=realtime_info, trafficIpAddress=traffic_ip)
+                       realTimeTraffic=realtime_info, trafficIpAddress=traffic_ip, realTimeTable=trafficTable)
 
 
 def generate_mac_addr(address):

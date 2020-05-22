@@ -39,6 +39,11 @@ class MongoDAO():
         self._db.trafficIp.insert(json)
         print("Finish Insert packets by IP address traffic")
 
+    def saveRealTimeTable(self, json):
+        print("Start Insert traffic real time table")
+        self._db.trafficTable.insert(json)
+        print("Finish Insert traffic real time table")
+
     def updateIntradayMongo(self, id, json):
         print("Update intraday")
         self._db.trafficIntraday.update(
@@ -85,3 +90,6 @@ class MongoDAO():
 
     def getTrafficBetween(self):
         return self._db.trafficIntraday.find({})
+
+    def getRealTimeTrafficTable(self):
+        return self._db.trafficTable.find({})
