@@ -14,7 +14,8 @@ def intraday():
         subtitle = request.args.get('subtitle')
 
         return responseData("success", 200, service.getTrafficByDate(request.args.get('date', 00), exibition,subtitle))
-    except:
+    except Exception as e:
+        print(e)
         return responseData("error", 500, [])
 
 
@@ -25,7 +26,8 @@ def traffic_hour():
         subtitle = request.args.get('subtitle')
 
         return responseData("success", 200, service.getTrafficHourByDate(request.args.get('date', 00),exibition,subtitle))
-    except:
+    except Exception as e:
+        print(e)
         return responseData("error", 500, [])
 
 
@@ -38,7 +40,8 @@ def ipv4_source_traffic():
         subtitle = request.args.get('subtitle')
 
         return responseData("success", 200, service.getTrafficIp(date, hour, "Source-IPs",exibition,subtitle))
-    except:
+    except Exception as e:
+        print(e)
         return responseData("error", 500, [])
 
 
@@ -51,7 +54,8 @@ def ipv4_destination_traffic():
         subtitle = request.args.get('subtitle')
 
         return responseData("success", 200, service.getTrafficIp(date, hour, "Destination-IPs",exibition,subtitle))
-    except:
+    except Exception as e:
+        print(e)
         return responseData("error", 500, [])
 
 
@@ -62,14 +66,16 @@ def realTimeGraph():
         subtitle = request.args.get('subtitle')
 
         return responseData("success", 200, service.getRealTimeService(exibition,subtitle))
-    except:
+    except Exception as e:
+        print(e)
         return responseData("error", 500, [])
 
 @routes.route('/realtime/table')
 def realTimeTable():
     try:
         return responseData("success", 200, service.getRealTimeTrafficTableService())
-    except:
+    except Exception as e:
+        print(e)
         return responseData("error", 500, [])
 
 @routes.route('/trafficmac')
@@ -79,7 +85,8 @@ def trafficmac():
         subtitle = request.args.get('subtitle')
 
         return responseData("success", 200, service.getTrafficByMacAddress( request.args.get('date', 00),exibition,subtitle))
-    except:
+    except Exception as e:
+        print(e)
         return responseData("error", 500, [])
 
 
@@ -92,7 +99,8 @@ def trafficRange():
         end = request.args.get('end', 00)
 
         return responseData("success", 200, service.getTrafficByRange(start, end, exibition,subtitle))
-    except:
+    except Exception as e:
+        print(e)
         return responseData("error", 500, [])
 
 

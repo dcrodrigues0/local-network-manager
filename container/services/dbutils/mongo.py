@@ -92,4 +92,4 @@ class MongoDAO():
         return self._db.trafficIntraday.find({})
 
     def getRealTimeTrafficTable(self):
-        return self._db.trafficTable.find({})
+        return self._db.trafficTable.find({}, {"_id": 0})
