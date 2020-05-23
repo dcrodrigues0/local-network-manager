@@ -1,8 +1,8 @@
 <script>
-import { Scatter } from 'vue-chartjs'
+import { Bar } from 'vue-chartjs'
 
 export default {
-  extends: Scatter,
+  extends: Bar,
   
   data (){
     return{
