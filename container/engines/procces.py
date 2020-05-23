@@ -8,13 +8,14 @@ from container.engines import parsePcap as parser
 fileSrc = os.getenv("FILE_PATH")
 backup = os.getenv("FILE_FOLDER_BACKUP")
 queue = []
+
 def proccess():
 
     while True:
         if len(queue) == 0:
             continue
 
-        print("queue size " + str(len(queue)))
+        #print("queue size " + str(len(queue)))
         try:
             filepath = queue.pop()
             filecap, file = read(filepath)
@@ -23,7 +24,6 @@ def proccess():
             os.remove(filepath)
         except Exception as e:
             print(e)
-            return e
 
         time.sleep(30)
 
