@@ -18,33 +18,63 @@ def parse(fileCap):
     ips_destination = []
     ips_source = []
     traffic_table = []
+
     for ts, buf in fileCap:
         try:
             eth = dpkt.ethernet.Ethernet(buf)
             ip = eth.data
-            proto = ip.data
+
+            proto = ip.data if hasattr(ip, 'data') else None
+            protocol = ip.get_proto(ip.p).__name__ if hasattr(ip, 'get_proto') else None
+
+            source_ip = None
+            source_port = None
+            destination_ip = None
+            destination_port = None
+            length = None
+            ttl = None
 
             timestamp = str(datetime.datetime.fromtimestamp(ts))
             timestampArray = util.timestampFormat(timestamp)
             packets_count += 1
-            packets_length += ip.len
 
-            source_ip = util.replace_ip_string(inet_to_str(ip.src))
-            destination_ip = util.replace_ip_string(inet_to_str(ip.dst))
+            if eth.type == dpkt.ethernet.ETH_TYPE_ARP:
 
-            ips_source.append(source_ip)
-            ips_destination.append(destination_ip)
+                protocol = "ARP"
+                source_ip = util.replace_ip_string(inet_to_str(ip.spa))
+                destination_ip = util.replace_ip_string(inet_to_str(ip.tpa))
+                length = ip.pln
 
-            protocol = ip.get_proto(ip.p).__name__
-            source_port = proto.sport
-            destination_port = proto.dport
+            elif eth.type == dpkt.ethernet.ETH_TYPE_IP:
 
-            table_record = {"Source-IP": str(source_ip) + ":" + str(source_port),
-                            "Destination-IP": str(destination_ip) + ":" + str(destination_port),
-                            "Protocol": protocol, "Length": ip.len, "TTL": ip.ttl}
+                packets_length += ip.len
+                source_ip = util.replace_ip_string(inet_to_str(ip.src))
+                destination_ip = util.replace_ip_string(inet_to_str(ip.dst))
+                source_port = proto.sport if hasattr(proto, 'sport') else None
+                destination_port = proto.dport if hasattr(proto, 'dport') else None
+                length = ip.len
+                ttl = ip.ttl
+
+            elif eth.type == dpkt.ethernet.ETH_TYPE_IP6:
+
+                packets_length += ip.plen
+                source_ip = socket.inet_ntop(socket.AF_INET6, ip.src)
+                destination_ip = socket.inet_ntop(socket.AF_INET6, ip.dst)
+                source_port = proto.sport if hasattr(proto, 'sport') else None
+                destination_port = proto.dport if hasattr(proto, 'dport') else None
+                length = ip.plen
+                ttl = ip.hlim
+
+            ips_source.append(source_ip) if source_ip is not None else ips_source.append("Undefined")
+            ips_destination.append(destination_ip) if destination_ip is not None else ips_destination.append("Undefined")
+
+            table_record = {"Source-IP": str(source_ip), "Source-Port": source_port,
+                            "Destination-IP": str(destination_ip), "Destination-Port": destination_port,
+                            "Protocol": protocol, "Length": length, "TTL": ttl}
+
             traffic_table.append(table_record)
-        except:
-            pass
+        except Exception as e:
+            print(e)
 
     dateMonthDat = timestampArray[2] + "-" + timestampArray[1]
 
