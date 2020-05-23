@@ -17,6 +17,9 @@ class Service(mongo.MongoDAO):
     def getRealTimeService(self,exibition, subtitle):
         return self.makeDataGraph(self.getRealTime(), "min", "quantidade_pacotes",exibition, subtitle)
 
+    def getRealTimeTrafficTableService(self):
+        return self.getRealTimeTrafficTable()
+
     def getTrafficByMacAddress(self, date,exibition, subtitle):
         return self.makeDataGraph(self.getTrafficMac(date), 'mac_origem', 'quantidade_pacotes', exibition, subtitle)
 

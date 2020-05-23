@@ -65,6 +65,12 @@ def realTime():
     except:
         return responseData("error", 500, [])
 
+@routes.route('/realtime/table')
+def realTime():
+    try:
+        return responseData("success", 200, service.getRealTimeTrafficTableService())
+    except:
+        return responseData("error", 500, [])
 
 @routes.route('/trafficmac')
 def trafficmac():
