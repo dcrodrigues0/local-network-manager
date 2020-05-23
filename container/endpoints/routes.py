@@ -56,7 +56,7 @@ def ipv4_destination_traffic():
 
 
 @routes.route('/realtime')
-def realTime():
+def realTimeGraph():
     try:
         exibition = request.args.get('exibition')
         subtitle = request.args.get('subtitle')
@@ -66,7 +66,7 @@ def realTime():
         return responseData("error", 500, [])
 
 @routes.route('/realtime/table')
-def realTime():
+def realTimeTable():
     try:
         return responseData("success", 200, service.getRealTimeTrafficTableService())
     except:
