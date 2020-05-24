@@ -76,13 +76,14 @@ def realTimeGraph():
 def realTimeTable():
     try:
         source_ip = request.args.get('src-ip')
-        source_port = request.args.get('src-port')
-
         destination_ip = request.args.get('dst-ip')
+
+        source_port = request.args.get('src-port')
         destination_port = request.args.get('dst-port')
 
         start_src_port = request.args.get('start-src-port')
         end_src_port = request.args.get('end-src-port')
+
         start_dst_port = request.args.get('start-dst-port')
         end_dst_port = request.args.get('end-dst-port')
 
@@ -90,14 +91,18 @@ def realTimeTable():
 
         start_length = request.args.get('start-length')
         end_length = request.args.get('end-length')
+
         start_ttl = request.args.get('start-ttl')
         end_ttl = request.args.get('end-ttl')
 
         limit_query = request.args.get('limit')
 
+        date = request.args.get('date')
+        hour = request.args.get('hour')
+
         return responseData("success", 200,
-                            service.getRealTimeTrafficTableService(source_ip=source_ip, source_port=source_port,
-                                                                   destination_ip=destination_ip,
+                            service.getRealTimeTrafficTableService(source_ip=source_ip, destination_ip=destination_ip,
+                                                                   source_port=source_port,
                                                                    destination_port=destination_port, protocol=protocol,
                                                                    start_length=start_length, end_length=end_length,
                                                                    start_ttl=start_ttl, end_ttl=end_ttl,
@@ -105,7 +110,9 @@ def realTimeTable():
                                                                    end_src_port=end_src_port,
                                                                    start_dst_port=start_dst_port,
                                                                    end_dst_port=end_dst_port,
-                                                                   limit=limit_query))
+                                                                   limit=limit_query,
+                                                                   date=date,
+                                                                   hour=hour))
     except Exception as e:
         print(e)
         return responseData("error", 500, [])

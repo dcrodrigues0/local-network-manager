@@ -16,11 +16,11 @@ class Service(mongo.MongoDAO):
         return self.makeDataGraph(self.getRealTime(), "min", "quantidade_pacotes", exibition, subtitle)
 
     def getRealTimeTrafficTableService(self, **Kwargs):
-        args = self.createArgumentsinArray(Kwargs)
+        filter_args = self.formatFilterArguments(Kwargs)
+        date_args = self.formatDateArguments(Kwargs)
+        limit = self.formatLimitArgument(Kwargs["limit"])
 
-        Kwargs["limit"] = int(Kwargs["limit"]) if Kwargs["limit"] is not None and int(Kwargs["limit"]) < 500 else 100
-
-        return self.formatTableData(self.getRealTimeTrafficTable(args, Kwargs["limit"]))
+        return self.formatTableData(self.getRealTimeTrafficTable(filter_args, date_args, limit))
 
     def getTrafficByMacAddress(self, date, exibition, subtitle):
         return self.makeDataGraph(self.getTrafficMac(date), 'mac_origem', 'quantidade_pacotes', exibition, subtitle)
@@ -99,8 +99,7 @@ class Service(mongo.MongoDAO):
 
         return {"dataset": table_dataset}
 
-
-    def createArgumentsinArray(self, kwargs):
+    def formatFilterArguments(self, kwargs):
         args = []
 
         if kwargs.get("source_ip") is not None:
@@ -109,7 +108,8 @@ class Service(mongo.MongoDAO):
 
         if kwargs.get("destination_ip") is not None:
             kwargs["destination_ip"] = util.replace_ip_string(kwargs["destination_ip"], False)
-            args.append({"$regexMatch": {"input": "$$t.Destination-IP", "regex": ".*" + kwargs["destination_ip"] + ".*"}})
+            args.append(
+                {"$regexMatch": {"input": "$$t.Destination-IP", "regex": ".*" + kwargs["destination_ip"] + ".*"}})
 
         if kwargs.get("source_port") is not None:
             args.append({"$eq": ["$$t.Source-Port", int(kwargs["source_port"])]})
@@ -149,3 +149,18 @@ class Service(mongo.MongoDAO):
             args.append({"$gte": ["$$t.TTL", 0]})
 
         return args
+
+    def formatDateArguments(self, kwargs):
+
+        if kwargs["date"] is not None and kwargs["hour"] is not None:
+            return {"$match": {"$and": [{"date": kwargs["date"]}, {"hour": kwargs["hour"]}]}}
+        elif kwargs["date"] is not None:
+            return {"$match": {"date": kwargs["date"]}}
+        elif kwargs["hour"] is not None:
+            return {"$match": {"hour": kwargs["hour"]}}
+        else:
+            return None
+
+    def formatLimitArgument(self, limit):
+        return int(limit) if limit is not None and int(limit) < 500 else 100
+
