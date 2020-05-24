@@ -95,7 +95,7 @@ class Service(mongo.MongoDAO):
         for record in table_collection:
             record["Traffic"]["Source-IP"] = util.replace_ip_string(record["Traffic"]["Source-IP"], False)
             record["Traffic"]["Destination-IP"] = util.replace_ip_string(record["Traffic"]["Destination-IP"], False)
-            table_dataset.append(record)
+            table_dataset.append(record["Traffic"])
 
         return {"dataset": table_dataset}
 
