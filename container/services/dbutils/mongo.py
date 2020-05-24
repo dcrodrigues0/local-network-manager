@@ -91,5 +91,25 @@ class MongoDAO():
     def getTrafficBetween(self):
         return self._db.trafficIntraday.find({})
 
-    def getRealTimeTrafficTable(self):
-        return self._db.trafficTable.find({}, {"_id": 0})
+    def getRealTimeTrafficTable(self, args, limit):
+        pipeline = [
+            {
+                "$project": {
+                    "_id": 0,
+                    "Traffic": {
+                        "$filter": {
+                            "input": "$Traffic",
+                            "as": "t",
+                            "cond": {
+                                "$and": args
+                            }
+                        }
+                    }
+                }
+            },
+            {"$unwind": "$Traffic"},
+            {"$limit": limit}
+        ]
+
+        return self._db.trafficTable.aggregate(pipeline)
+

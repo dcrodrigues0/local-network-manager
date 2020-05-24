@@ -15,8 +15,12 @@ class Service(mongo.MongoDAO):
     def getRealTimeService(self, exibition, subtitle):
         return self.makeDataGraph(self.getRealTime(), "min", "quantidade_pacotes", exibition, subtitle)
 
-    def getRealTimeTrafficTableService(self):
-        return self.formatTableData(self.getRealTimeTrafficTable())
+    def getRealTimeTrafficTableService(self, **Kwargs):
+        args = self.createArgumentsinArray(Kwargs)
+
+        if Kwargs["limit"] is None or Kwargs["limit"] > 500: Kwargs["limit"] = 100
+
+        return self.formatTableData(self.getRealTimeTrafficTable(args, Kwargs["limit"]))
 
     def getTrafficByMacAddress(self, date, exibition, subtitle):
         return self.makeDataGraph(self.getTrafficMac(date), 'mac_origem', 'quantidade_pacotes', exibition, subtitle)
@@ -87,13 +91,61 @@ class Service(mongo.MongoDAO):
 
     def formatTableData(self, table_collection):
         table_dataset = []
+
         for record in table_collection:
+            record["Traffic"]["Source-IP"] = util.replace_ip_string(record["Traffic"]["Source-IP"], False)
+            record["Traffic"]["Destination-IP"] = util.replace_ip_string(record["Traffic"]["Destination-IP"], False)
+            table_dataset.append(record)
 
-            for traffic in record["Traffic"]:
-                traffic["Source-IP"] = util.replace_ip_string(traffic["Source-IP"], False)
-            for traffic in record["Traffic"]:
-                traffic["Destination-IP"] = util.replace_ip_string(traffic["Destination-IP"], False)
+        return {"dataset": table_dataset}
 
-            table_dataset += record["Traffic"]
 
-        return {"Traffic": table_dataset}
+    def createArgumentsinArray(self, kwargs):
+        args = []
+
+        if kwargs.get("source_ip") is not None:
+            kwargs["source_ip"] = util.replace_ip_string(kwargs["source_ip"], False)
+            args.append({"$regexMatch": {"input": "$$t.Source-IP", "regex": ".*" + kwargs["source_ip"] + ".*"}})
+
+        if kwargs.get("destination_ip") is not None:
+            kwargs["destination_ip"] = util.replace_ip_string(kwargs["destination_ip"], False)
+            args.append({"$regexMatch": {"input": "$$t.Destination-IP", "regex": ".*" + kwargs["destination_ip"] + ".*"}})
+
+        if kwargs.get("source_port") is not None:
+            args.append({"$eq": ["$$t.Source-Port", int(kwargs["source_port"])]})
+
+        if kwargs.get("start_src_port") is not None:
+            args.append({"$gte": ["$$t.Source-Port", int(kwargs["start_src_port"])]})
+
+        if kwargs.get("end_src_port") is not None:
+            args.append({"$lte": ["$$t.Source-Port", int(kwargs["end_src_port"])]})
+
+        if kwargs.get("destination_port") is not None:
+            args.append({"$eq": ["$$t.Destination-Port", int(kwargs["destination_port"])]})
+
+        if kwargs.get("start_dst_port") is not None:
+            args.append({"$gte": ["$$t.Destination-Port", int(kwargs["start_dst_port"])]})
+
+        if kwargs.get("end_dst_port") is not None:
+            args.append({"$lte": ["$$t.Destination-Port", int(kwargs["end_dst_port"])]})
+
+        if kwargs.get("protocol") is not None:
+            kwargs["protocol"] = kwargs["protocol"].upper()
+            args.append({"$eq": ["$$t.Protocol", kwargs["protocol"]]})
+
+        if kwargs.get("start_length") is not None:
+            args.append({"$gte": ["$$t.Length", int(kwargs["start_length"])]})
+
+        if kwargs.get("end_length") is not None:
+            args.append({"$lte": ["$$t.Length", int(kwargs["end_length"])]})
+
+        if kwargs.get("start_ttl") is not None:
+            args.append({"$gte": ["$$t.TTL", int(kwargs["start_ttl"])]})
+
+        if kwargs.get("end_ttl") is not None:
+            args.append({"$lte": ["$$t.TTL", int(kwargs["end_ttl"])]})
+
+        if len(args) == 0:
+            args.append({"$gte": ["$$t.TTL", 0]})
+
+        return args
