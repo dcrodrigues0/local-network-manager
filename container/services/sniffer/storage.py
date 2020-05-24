@@ -13,6 +13,7 @@ class Storage(mongo.MongoDAO):
         self.saveRealTime(Kwargs.get("realTimeTraffic"))
         self.saveTrafficByMac(Kwargs.get("trafficMac"))
         self.saveTrafficByIpAddr(Kwargs.get("trafficIpAddress"))
+        self.saveRealTimeTrafficTable(Kwargs.get("realTimeTable"))
 
     def saveIntraday(self, trafficDay):
         update = self.updateIntraday(trafficDay)
@@ -55,6 +56,9 @@ class Storage(mongo.MongoDAO):
         else:
             ips = self.add_new_ips(database_ips, packets)
             self.updateTrafficByIpAddr(ips["_id"], ips)
+
+    def saveRealTimeTrafficTable(self, trafficTable):
+        self.saveRealTimeTable(trafficTable)
 
     def updateIntraday(self, json):
         result = self.getTrafficByDay(json["date"])

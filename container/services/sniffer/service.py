@@ -2,22 +2,23 @@ from container.services.dbutils import mongo
 from container.util import util
 
 
-
 class Service(mongo.MongoDAO):
     def __init__(self):
         mongo.MongoDAO.__init__(self)
-        # organiza a conexão
 
     def getTrafficByDate(self, date, exibition, subtitle):
-        return self.makeDataGraph(self.getTrafficByDay(date), 'date', 'avg',exibition, subtitle)
+        return self.makeDataGraph(self.getTrafficByDay(date), 'date', 'avg', exibition, subtitle)
 
     def getTrafficHourByDate(self, date, exibition, subtitle):
         return self.makeDataGraph(self.getTrafficHour(date), 'hour', 'quantidade_pacotes', exibition, subtitle)
 
-    def getRealTimeService(self,exibition, subtitle):
-        return self.makeDataGraph(self.getRealTime(), "min", "quantidade_pacotes",exibition, subtitle)
+    def getRealTimeService(self, exibition, subtitle):
+        return self.makeDataGraph(self.getRealTime(), "min", "quantidade_pacotes", exibition, subtitle)
 
-    def getTrafficByMacAddress(self, date,exibition, subtitle):
+    def getRealTimeTrafficTableService(self):
+        return self.formatTableData(self.getRealTimeTrafficTable())
+
+    def getTrafficByMacAddress(self, date, exibition, subtitle):
         return self.makeDataGraph(self.getTrafficMac(date), 'mac_origem', 'quantidade_pacotes', exibition, subtitle)
 
     def getTrafficByRange(self, start, end, exibition, subtitle):
@@ -54,13 +55,13 @@ class Service(mongo.MongoDAO):
             i += 1
 
         return {'labels': labels,
-                'datasets': [{'data': dataset, 'label': subtitle, exibition: 'powderblue', 'backgroundColor':'rgba(176, 224, 230, 0.2)' if exibition == 'borderColor' else colors}]}
+                'datasets': [{'data': dataset, 'label': subtitle, exibition: 'powderblue',
+                              'backgroundColor': 'rgba(176, 224, 230, 0.2)' if exibition == 'borderColor' else colors}]}
 
-    def getTrafficIp(self, date, hour, direction, exibition,subtitle):
-        return self.makeDataIpGraph(self.getTrafficIpAddress(date, hour), direction, exibition,subtitle)
+    def getTrafficIp(self, date, hour, direction, exibition, subtitle):
+        return self.makeDataIpGraph(self.getTrafficIpAddress(date, hour), direction, exibition, subtitle)
 
-
-    def makeDataIpGraph(self, value, direction,exibition, subtitle):
+    def makeDataIpGraph(self, value, direction, exibition, subtitle):
         ips = value
         ips_dict = ips.next()
         labels = []
@@ -81,4 +82,18 @@ class Service(mongo.MongoDAO):
             i += 1
 
         return {'labels': labels,
-                'datasets': [{'data': dataset, 'label': subtitle, exibition: 'powderblue', 'backgroundColor':'rgba(176, 224, 230, 0.2)' if exibition == 'borderColor' else colors}]}
+                'datasets': [{'data': dataset, 'label': subtitle, exibition: 'powderblue',
+                              'backgroundColor': 'rgba(176, 224, 230, 0.2)' if exibition == 'borderColor' else colors}]}
+
+    def formatTableData(self, table_collection):
+        table_dataset = []
+        for record in table_collection:
+
+            for traffic in record["Traffic"]:
+                traffic["Source-IP"] = util.replace_ip_string(traffic["Source-IP"], False)
+            for traffic in record["Traffic"]:
+                traffic["Destination-IP"] = util.replace_ip_string(traffic["Destination-IP"], False)
+
+            table_dataset += record["Traffic"]
+
+        return {"Traffic": table_dataset}
