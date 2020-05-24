@@ -93,7 +93,7 @@ def realTimeTable():
         start_ttl = request.args.get('start-ttl')
         end_ttl = request.args.get('end-ttl')
 
-        limit_query = int(request.args.get('limit'))
+        limit_query = request.args.get('limit')
 
         return responseData("success", 200,
                             service.getRealTimeTrafficTableService(source_ip=source_ip, source_port=source_port,

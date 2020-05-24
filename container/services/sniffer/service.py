@@ -18,7 +18,7 @@ class Service(mongo.MongoDAO):
     def getRealTimeTrafficTableService(self, **Kwargs):
         args = self.createArgumentsinArray(Kwargs)
 
-        if Kwargs["limit"] is None or Kwargs["limit"] > 500: Kwargs["limit"] = 100
+        Kwargs["limit"] = int(Kwargs["limit"]) if Kwargs["limit"] is not None and int(Kwargs["limit"]) < 500 else 100
 
         return self.formatTableData(self.getRealTimeTrafficTable(args, Kwargs["limit"]))
 
