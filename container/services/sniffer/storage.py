@@ -48,7 +48,7 @@ class Storage(mongo.MongoDAO):
         update = self.updateTrafficByMac(trafficMac)
 
         if update == None:
-            self.saveTrafficByMac(trafficMac)
+            self.saveTrafficMac(trafficMac)
         else:
             quantidade = int(update["quantidade_pacotes"]) + int(trafficMac["quantidade_pacotes"])
             update["quantidade_pacotes"] = quantidade
