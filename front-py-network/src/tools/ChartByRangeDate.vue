@@ -1,13 +1,13 @@
 <template>
   <div class="root">
     <div id="chartPlace" v-bind:style="{'width':widthProp,'height':heightProp}" class="resizable-screen">
-      <div class="tools-tab" v-if="!isModal">
+      <div class="tools-tab" v-if="isModal == 'false'">
         <a title="Fechar gráfico" v-on:click="closeTab" href="#"><i class="far fa-window-close"></i></a>
         <a title="Maximizar gráfico" v-on:click="maximizeTab" href="#"><i class="far fa-window-restore"></i></a>
         <a title="Minimizar gráfico" v-on:click="minimizeTab" href="#"><i class="fas fa-window-minimize"></i></a>
         <p class="title-graph">{{ title }}</p>
       </div>
-      <div class="size-control" v-if="!isModal">
+      <div class="size-control" v-if="isModal == 'false'">
         <div>
           <a v-on:click="selectDataRange()" href="#" @click="configChart">
             <i class="fas fa-search"></i>
@@ -163,9 +163,9 @@
       default: 'Favor colocar titulo :)'
     },
     isModal: {
-      type: Boolean,
+      type: String,
       required: true,
-      default: false
+      default: 'false'
     }
     
     },

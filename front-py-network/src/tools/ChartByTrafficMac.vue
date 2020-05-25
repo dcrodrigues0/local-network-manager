@@ -1,13 +1,13 @@
 <template>
   <div class="root">
     <div v-bind:style="{'width':widthProp,'height':heightProp}" class="resizable-screen">
-      <div class="tools-tab" v-if="!isModal">
+      <div class="tools-tab" v-if="isModal == 'false'">
         <a title="Fechar gráfico" v-on:click="closeTab" href="#"><i class="far fa-window-close"></i></a>
         <a title="Maximizar gráfico" v-on:click="maximizeTab" href="#"><i class="far fa-window-restore"></i></a>
         <a title="Minimizar gráfico" v-on:click="minimizeTab" href="#"><i class="fas fa-window-minimize"></i></a>
         <p class="title-graph">{{ title }}</p>
       </div>
-      <div class="size-control" v-if="!isModal">
+      <div class="size-control" v-if="isModal == 'false'">
         <a v-on:click="selectDataRange()" href="#" @click="configChart">
           <i class="fas fa-search"></i>
         </a>
@@ -111,7 +111,9 @@
       },
       
       zoomChart: function(){
-        let obj = event.target.parentNode.parentNode.parentNode.parentNode;
+        let obj = event.target.parentNode.parentNode.parentNode;
+        console.log(obj);
+        
 
         if( obj.className.indexOf('col') !== -1){          
           obj.className = 'root col-12 fullscreen mt-3'
@@ -122,7 +124,9 @@
       },
 
       unzoomChart: function(){
-        let obj = event.target.parentNode.parentNode.parentNode.parentNode;
+        let obj = event.target.parentNode.parentNode.parentNode;
+        console.log(obj);
+        
 
         if( obj.className.indexOf('col') !== -1){          
           obj.className = 'root col-12 col-md-6  normalscreen mt-3'
@@ -175,9 +179,9 @@
       default: 'Favor colocar titulo :)'
     },
     isModal: {
-      type: Boolean,
+      type: String,
       required: true,
-      default: false
+      default: "false"
     }
     
     },

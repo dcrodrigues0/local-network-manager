@@ -1,16 +1,30 @@
 <script>
-import { Bar } from 'vue-chartjs'
+import { HorizontalBar } from 'vue-chartjs'
 
 export default {
-  extends: Bar,
+  extends: HorizontalBar,
   
   data (){
     return{
       dataChart:null
     }
   },
+
+    props:{
+    dtIni: {
+      type: String,
+      required: true,
+      default:'07-05'
+    },
+    dtFim: {
+      type: String,
+      required: true,
+      default:'15-05'
+    },
+  },
+
   created(){
-    this.$http.get('http://localhost:5000/ipv4/destination?date=14-05&hour=19&exibition=backgroundColor&subtitle=Quantidade de pacotes')
+    this.$http.get(`http://localhost:5000/ipv4/destination?date=${this.dtIni}&hour=${this.dtFim}&exibition=backgroundColor&subtitle=Quantidade de pacotes`)
     .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true}))
       
   }

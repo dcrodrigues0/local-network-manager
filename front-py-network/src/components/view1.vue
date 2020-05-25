@@ -1,12 +1,12 @@
 <template>
     <div class="content p-md-5 p-3">
       <div class="graphs row">
-        <Realtime class="col-md-6 col-12 mt-3" id='fuck' widthProp="100%" heightProp="300px" title="Consumo de pacotes realtime por minuto"/>
-        <ChartByRangeDate class="col-md-6 col-12 mt-3" id='fuck' widthProp="100%" heightProp="300px" title="Consumo de pacotes por data início/fim"/>        
-        <ChartPackageByHour class="col-md-6 col-12 mt-3" id='fuck' widthProp="100%" heightProp="300px" title="Pacotes consumidos por hora"/>
-        <ChartByIpAddress class="col-md-6 col-12 mt-3" id='fuck' widthProp="100%" heightProp="300px" title="Envio de pacotes por IP de origem"/>
-        <ChartByIpAddressDestination class="col-md-6 col-12 mt-3" id='fuck' widthProp="100%" heightProp="300px" title="Pacotes recebidos por IP de destino"/>
-        <ChartByTrafficMac class="col-md-6 col-12 mt-3" id='fuck' widthProp="100%" heightProp="300px" title="Consumo de pacotes por MAC Address de origem"/>
+        <Realtime class="col-md-6 col-12 mt-3" id='fuck' isModal="false" widthProp="100%" heightProp="300px" title="Consumo de pacotes realtime por minuto"/>
+        <ChartByRangeDate class="col-md-6 col-12 mt-3" id='fuck' isModal="false" widthProp="100%" heightProp="300px" title="Consumo de pacotes por data início/fim"/>        
+        <ChartPackageByHour class="col-md-6 col-12 mt-3" id='fuck' isModal="false" widthProp="100%" heightProp="300px" title="Pacotes consumidos por hora"/>
+        <ChartByIpAddress class="col-md-6 col-12 mt-3" id='fuck' isModal="false" widthProp="100%" heightProp="300px" title="Envio de pacotes por IP de origem"/>
+        <ChartByIpAddressDestination class="col-md-6 col-12 mt-3" id='fuck' isModal="false" widthProp="100%" heightProp="300px" title="Pacotes recebidos por IP de destino"/>
+        <ChartByTrafficMac class="col-md-6 col-12 mt-3" id='fuck' isModal="false" widthProp="100%" heightProp="300px" title="Consumo de pacotes por MAC Address de origem"/>
       </div>
       <b-modal centered size="xl" id="my-modal">
           <template v-slot:default>

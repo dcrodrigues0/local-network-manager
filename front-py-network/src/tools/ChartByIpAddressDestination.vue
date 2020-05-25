@@ -1,15 +1,18 @@
 <template>
   <div class="root">
     <div v-bind:style="{'width':widthProp,'height':heightProp}" class="resizable-screen">
-      <div class="tools-tab" v-if="!isModal">
+      <div class="tools-tab" v-if="isModal == 'false'">
         <a title="Fechar gráfico" v-on:click="closeTab" href="#"><i class="far fa-window-close"></i></a>
         <a title="Maximizar gráfico" v-on:click="maximizeTab" href="#"><i class="far fa-window-restore"></i></a>
         <a title="Minimizar gráfico" v-on:click="minimizeTab" href="#"><i class="fas fa-window-minimize"></i></a>
         <p class="title-graph">{{ title }}</p>
       </div>
 
-      <div class="size-control" v-if="!isModal">
+      <div class="size-control" v-if="isModal == 'false'">
         <div>
+          <a v-on:click="selectDataRange()" href="#" @click="configChart">
+            <i class="fas fa-search"></i>
+          </a>
           <a href="#" @click="$bvModal.show('my-modal')" id='chart-ip-address-d' class='zoom'>
             <i class="fas fa-expand"></i>
           </a>
@@ -25,16 +28,50 @@
       </div>
       <!--CHART BELOW PLEASE -->
       <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->
-      <ChartByIpAddress :style="{'width': 90%+'%', 'height':85 + '%'}"/>
+      <ChartByIpAddress  v-if="createGraphByFilter()" :dtIni="this.dtIni" :dtFim="this.dtFim" :style="{'width': 90%+'%', 'height':85 + '%'}"/>
     </div>
   </div>
 </template>
 
 <script>
   import ChartByIpAddress from '@/charts/ChartByIpAddressDestination.vue';
+  import Swal from 'sweetalert2';
+  import '@sweetalert2/theme-dark'; //para deixar a modal dark :)
 
   export default {  
     methods: {
+
+      createGraphByFilter: function (){
+        if(this.dtIni && this.dtFim){
+          return true;
+        }else{
+          return false;
+        }
+      },
+
+      selectDataRange: function () {
+        this.dtIni = "";
+        this.dtFim = "";
+        Swal.mixin({
+          input: 'text',
+          confirmButtonText: 'Próximo &rarr;',
+          inputPlaceholder:'Ex:07-05',
+          showCancelButton: false,
+          allowOutsideClick:false,
+          allowEscapeKey:false,
+          progressSteps: ['1', '2']
+          }).queue([
+            'Data',
+            'Horas',
+          ]).then((result) => {
+          if (result.value) {
+            const answers = result.value;
+            this.dtIni = answers[0];
+            this.dtFim = answers[1];
+          }
+        })
+      },
+
       closeTab: function () {
 
       if(event.target.tagName == "A"){
@@ -103,7 +140,9 @@
     data () {
         return {
           dataGraph: null,
-          response: ""
+          response: "",
+          dtIni:"14-05",
+          dtFim:"19"
       }
     },
 
@@ -126,9 +165,9 @@
         default: 'Favor colocar titulo :)'
       },
       isModal: {
-        type: Boolean,
+        type: String,
         required: true,
-        default: false
+        default: "false"
       }
     
     },
