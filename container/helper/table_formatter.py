@@ -48,7 +48,7 @@ def formatFilterArguments(kwargs):
         args.append({"$lte": ["$$t.TTL", int(kwargs["end_ttl"])]})
 
     if len(args) == 0:
-        args.append({"$gte": ["$$t.TTL", 0]})
+        args.append({"$ne": ["$$t.Protocol", None]})
 
     return args
 
@@ -65,7 +65,7 @@ def formatDateArguments(kwargs):
 
 
 def formatLimitArgument(limit):
-    return int(limit) if limit is not None and int(limit) < 500 else 100
+    return int(limit) if limit is not None and int(limit) <= 500 else 100
 
 
 def formatTableData(table_collection):
