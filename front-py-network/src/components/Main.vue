@@ -18,7 +18,7 @@
             label-size="sm"
             label-for="Source-IP"
             class="mb-0">
-            <b-form-input id="Source-IP" name="src-ip" placeholder="185.50.107.238">
+            <b-form-input id="Source-IP" name="src-ip" placeholder="192.168.0.1">
 
             </b-form-input>
           </b-form-group>
@@ -32,7 +32,7 @@
             label-size="sm"
             label-for="Source-Port"
             class="mb-0">
-            <b-form-input id="Source-Port" name="src-port" placeholder="50001">
+            <b-form-input id="Source-Port" name="src-port" placeholder="80">
 
             </b-form-input>
           </b-form-group>
@@ -40,13 +40,13 @@
 
         <b-col lg="12" class="my-1 ">
           <b-form-group
-            label="Min Porta - Origem"
+            label="Mín. Porta - Origem"
             label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Start-source-port"
             class="mb-0">
-            <b-form-input id="Start-source-port" name="start-src-port" placeholder="185.50.107.238">
+            <b-form-input id="Start-source-port" name="start-src-port" placeholder="1">
 
             </b-form-input>
           </b-form-group>
@@ -54,13 +54,13 @@
 
         <b-col lg="12" class="my-1 ">
           <b-form-group
-            label="Max Porta - Origem"
+            label="Máx. Porta - Origem"
             label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="End-source-port"
             class="mb-0">
-            <b-form-input id="End-source-port" name="end-src-port" placeholder="192.168.1.2">
+            <b-form-input id="End-source-port" name="end-src-port" placeholder="65535">
 
             </b-form-input>
           </b-form-group>
@@ -74,7 +74,7 @@
             label-size="sm"
             label-for="Destination-IP"
             class="mb-0">
-            <b-form-input id="Destination-IP" name="dst-ip" placeholder="192.168.1.2">
+            <b-form-input id="Destination-IP" name="dst-ip" placeholder="192.168.0.1">
 
             </b-form-input>
           </b-form-group>
@@ -82,13 +82,13 @@
 
         <b-col lg="12" class="my-1 ">
           <b-form-group
-            label="Porta-Destino"
+            label="Porta - Destino"
             label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Destination-Port"
             class="mb-0">
-            <b-form-input id="Destination-Port" name="dst-port" placeholder="52136">
+            <b-form-input id="Destination-Port" name="dst-port" placeholder="80">
 
             </b-form-input>
           </b-form-group>
@@ -96,13 +96,13 @@
 
         <b-col lg="12" class="my-1 ">
           <b-form-group
-            label="Min Porta - Destino"
+            label="Mín. Porta - Destino"
             label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Start-destination-Port"
             class="mb-0">
-            <b-form-input id="Start-destination-Port" name="start-dst-port" placeholder="50001">
+            <b-form-input id="Start-destination-Port" name="start-dst-port" placeholder="1">
 
             </b-form-input>
           </b-form-group>
@@ -110,13 +110,13 @@
 
         <b-col lg="12" class="my-1 ">
           <b-form-group
-            label="Max Porta - Destino"
+            label="Máx. Porta - Destino"
             label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="End-destination-Port"
             class="mb-0">
-            <b-form-input id="End-destination-Port" name="end-dst-port" placeholder="52136">
+            <b-form-input id="End-destination-Port" name="end-dst-port" placeholder="65535">
 
             </b-form-input>
           </b-form-group>
@@ -130,7 +130,7 @@
             label-size="sm"
             label-for="Protocol"
             class="mb-0">
-            <b-form-input id="Protocol" name="protocol" placeholder="UDP">
+            <b-form-input id="Protocol" name="protocol" placeholder="Ex: TCP">
 
             </b-form-input>
           </b-form-group>
@@ -138,13 +138,13 @@
 
         <b-col lg="12" class="my-1 ">
           <b-form-group
-            label="Min Tamanho"
+            label="Mín. Comprimento"
             label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Length"
             class="mb-0">
-            <b-form-input id="Length" name="start-length" placeholder="71">
+            <b-form-input id="Length" name="start-length" placeholder="0">
 
             </b-form-input>
           </b-form-group>
@@ -152,13 +152,13 @@
 
         <b-col lg="12" class="my-1 ">
           <b-form-group
-            label="Max Tamanho"
+            label="Máx. Comprimento"
             label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Length"
             class="mb-0">
-            <b-form-input id="Length" name="end-length" placeholder="922">
+            <b-form-input id="Length" name="end-length" placeholder="1000">
 
             </b-form-input>
           </b-form-group>
@@ -166,13 +166,13 @@
 
         <b-col lg="12" class="my-1 ">
           <b-form-group
-            label="Min TTL"
+            label="Mín. TTL"
             label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="ttl"
             class="mb-0">
-            <b-form-input id="ttl" name="start-ttl" placeholder="58">
+            <b-form-input id="ttl" name="start-ttl" placeholder="0">
 
             </b-form-input>
           </b-form-group>
@@ -180,13 +180,13 @@
 
         <b-col lg="12" class="my-1 ">
           <b-form-group
-            label="Max TTL"
+            label="Máx. TTL"
             label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="ttl"
             class="mb-0">
-            <b-form-input id="ttl" name="end-ttl" placeholder="64">
+            <b-form-input id="ttl" name="end-ttl" placeholder="1000">
 
             </b-form-input>
           </b-form-group>
@@ -201,7 +201,7 @@
             label-size="sm"
             label-for="date"
             class="mb-0">
-            <b-form-input id="date" name="date" placeholder="24-05">
+            <b-form-input id="date" name="date" placeholder="25-05">
 
             </b-form-input>
           </b-form-group>
@@ -215,7 +215,7 @@
             label-size="sm"
             label-for="hour"
             class="mb-0">
-            <b-form-input id="hour" name="hour" placeholder="04">
+            <b-form-input id="hour" name="hour" placeholder="00">
 
             </b-form-input>
           </b-form-group>
@@ -224,13 +224,13 @@
 
         <b-col lg="12" class="my-1 ">
           <b-form-group
-            label="Límite"
+            label="Limite"
             label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="limit"
             class="mb-0">
-            <b-form-input id="limit" name="limit" placeholder="100">
+            <b-form-input id="limit" name="limit" placeholder="500">
 
             </b-form-input>
           </b-form-group>
@@ -314,7 +314,7 @@
           { key: 'Destination-IP', isRowHeader: true, sortable: true, label:'IP - Destino'},
           { key: 'Destination-Port', isRowHeader: true, sortable: true, label:'Porta - Destino'},
           { key: 'Protocol', isRowHeader: true, sortable: true, label: 'Protocolo'},
-          { key: 'Length', isRowHeader: true,  sortable: true, label:'Tamanho'},
+          { key: 'Length', isRowHeader: true,  sortable: true, label:'Comprimento'},
           { key: 'TTL', isRowHeader: true, sortable: true},
 
 
