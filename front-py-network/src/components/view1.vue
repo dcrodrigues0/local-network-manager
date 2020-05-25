@@ -11,11 +11,11 @@
       <b-modal centered size="xl" id="my-modal">
           <template v-slot:default>
             <div>
-              <Realtime v-if="chart === 'realtime'" class="col-12 mt-3" widthProp="100%" heightProp="80%" title="Consumo de pacotes realtime por minuto"/>
-              <ChartByRangeDate v-else-if="chart === 'chart-range-date'" class="col-12 mt-3" widthProp="100%" heightProp="80%" title="Consumo de pacotes por data início/fim"/>
-              <ChartPackageByHour v-else-if="chart === 'chart-package-hour'" class="col-12 mt-3" widthProp="100%" heightProp="80%" title="Pacotes consumidos por hora"/>
-              <ChartByIpAddress v-else-if="chart === 'chart-ip-address'" class="col-12 mt-3" widthProp="100%" heightProp="80%" title="Envio de pacotes por IP de origem"/>
-              <ChartByIpAddressDestination v-else-if="chart === 'chart-ip-address-d'" class="col-12 mt-3" widthProp="100%" heightProp="80%" title="Pacotes recebidos por IP de destino "/>
+              <Realtime v-if="chart === 'realtime'" class="col-12 mt-3" isModal="true" widthProp="100%" heightProp="80%" title="Consumo de pacotes realtime por minuto"/>
+              <ChartByRangeDate v-else-if="chart === 'chart-range-date'" class="col-12 mt-3" isModal="true" widthProp="100%" heightProp="80%" title="Consumo de pacotes por data início/fim"/>
+              <ChartPackageByHour v-else-if="chart === 'chart-package-hour'" class="col-12 mt-3" isModal="true" widthProp="100%" heightProp="80%" title="Pacotes consumidos por hora"/>
+              <ChartByIpAddress v-else-if="chart === 'chart-ip-address'" class="col-12 mt-3" isModal="true" widthProp="100%" heightProp="80%" title="Envio de pacotes por IP de origem"/>
+              <ChartByIpAddressDestination v-else-if="chart === 'chart-ip-address-d'" class="col-12 mt-3" isModal="true" widthProp="100%" heightProp="80%" title="Pacotes recebidos por IP de destino "/>
             </div>
           </template>
       </b-modal>

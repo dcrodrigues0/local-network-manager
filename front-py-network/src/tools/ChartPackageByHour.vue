@@ -1,13 +1,13 @@
 <template>
   <div class="root">
     <div v-bind:style="{'width':widthProp,'height':heightProp}" class="resizable-screen">
-      <div class="tools-tab">
+      <div class="tools-tab" v-if="!isModal">
         <a title="Fechar gráfico" v-on:click="closeTab" href="#"><i class="far fa-window-close"></i></a>
         <a title="Maximizar gráfico" v-on:click="maximizeTab" href="#"><i class="far fa-window-restore"></i></a>
         <a title="Minimizar gráfico" v-on:click="minimizeTab" href="#"><i class="fas fa-window-minimize"></i></a>
         <p class="title-graph">{{ title }}</p>
       </div>
-      <div class="size-control">
+      <div class="size-control" v-if="!isModal">
         <div>
           <a v-on:click="selectDataRange()" href="#" @click="configChart">
             <i class="fas fa-search"></i>
@@ -159,6 +159,11 @@
       type: String,
       default: 'Favor colocar titulo :)'
     },
+    isModal: {
+      type: Boolean,
+      required: true,
+      default: false
+    }
     
     },
 
