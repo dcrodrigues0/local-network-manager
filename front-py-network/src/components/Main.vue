@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="rightBar">
+
+    </div>
       <b-form  @submit="submit" class="row">
 
         <b-col lg="5" class="my-1 ">
@@ -335,6 +338,12 @@
 </script>
 
 <style >
+
+  .rightBar{
+    width: 40%;
+    height: 100vh;
+    
+  }
 
   form{
     color: #335e8d;
