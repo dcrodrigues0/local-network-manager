@@ -7,7 +7,7 @@
 
         <b-col lg="5" class="my-1 ">
           <b-form-group
-            label="Source IP"
+            label="IP - Origem"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -21,7 +21,7 @@
 
         <b-col lg="5" class="my-1">
           <b-form-group
-            label="Source Port"
+            label="Porta - Origem"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -35,7 +35,7 @@
 
         <b-col lg="5" class="my-1">
           <b-form-group
-            label="Start Source Port"
+            label="Min Porta - Origem"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -49,7 +49,7 @@
 
         <b-col lg="5" class="my-1">
           <b-form-group
-            label="End Source Port"
+            label="Max Porta - Origem"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -63,7 +63,7 @@
 
         <b-col lg="5" class="my-1">
           <b-form-group
-            label="Destination IP"
+            label="IP - Destino"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -77,7 +77,7 @@
 
         <b-col lg="5" class="my-1">
           <b-form-group
-            label="Destination-Port"
+            label="Porta-Destino"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -91,7 +91,7 @@
 
         <b-col lg="5" class="my-1">
           <b-form-group
-            label="Start Destination-Port"
+            label="Min Porta - Destino"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -105,7 +105,7 @@
 
         <b-col lg="5" class="my-1">
           <b-form-group
-            label="End Destination Port"
+            label="Max Porta - Destino"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -119,7 +119,7 @@
 
         <b-col lg="3" class="my-1">
           <b-form-group
-            label="Protocol"
+            label="Protocolo"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -133,7 +133,7 @@
 
         <b-col lg="3"  class="my-1">
           <b-form-group
-            label="Start Length"
+            label="Min Tamanho"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -147,7 +147,7 @@
 
         <b-col lg="3"  class="my-1">
           <b-form-group
-            label="End Length"
+            label="Max Tamanho"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -161,7 +161,7 @@
 
         <b-col lg="3" class="my-1">
           <b-form-group
-            label="Start TTL"
+            label="Min TTL"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -175,7 +175,7 @@
 
         <b-col lg="3" class="my-1">
           <b-form-group
-            label="End TTL"
+            label="Max TTL"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
@@ -216,7 +216,22 @@
           </b-form-group>
         </b-col>
 
-        <b-button type="submit" variant="primary" class="col-lg-3" size="md">Search</b-button>
+
+        <b-col lg="3" class="my-1">
+          <b-form-group
+            label="Límite"
+            label-cols-sm="3"
+            label-align-sm="right"
+            label-size="sm"
+            label-for="limit"
+            class="mb-0">
+            <b-form-input id="limit" name="limit" placeholder="100">
+
+            </b-form-input>
+          </b-form-group>
+        </b-col>
+
+        <b-button type="submit" variant="primary" class="col-lg-4 offset-lg-4 mt-3" size="md">Search</b-button>
 
       </b-form>
 
@@ -285,12 +300,12 @@
         filter: null,
         filterOn: [],
         fields: [
-          { key: 'Source-IP', isRowHeader: true, sortable: true, label:'Source'},
-          { key: 'Source-Port', isRowHeader: true, sortable: true, label:'Source Port'},
-          { key: 'Destination-IP', isRowHeader: true, sortable: true, label:'Destination'},
-          { key: 'Destination-Port', isRowHeader: true, sortable: true, label:'Destination Port'},
-          { key: 'Protocol', isRowHeader: true, sortable: true},
-          { key: 'Length', isRowHeader: true,  sortable: true},
+          { key: 'Source-IP', isRowHeader: true, sortable: true, label:'IP - Origem'},
+          { key: 'Source-Port', isRowHeader: true, sortable: true, label:'Porta - Origem'},
+          { key: 'Destination-IP', isRowHeader: true, sortable: true, label:'IP - Destino'},
+          { key: 'Destination-Port', isRowHeader: true, sortable: true, label:'Porta - Destino'},
+          { key: 'Protocol', isRowHeader: true, sortable: true, label: 'Protocolo'},
+          { key: 'Length', isRowHeader: true,  sortable: true, label:'Tamanho'},
           { key: 'TTL', isRowHeader: true, sortable: true},
 
 
