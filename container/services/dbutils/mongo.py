@@ -65,6 +65,14 @@ class MongoDAO():
                  {"quantidade_pacotes": json["quantidade_pacotes"]},
              }, upsert=True)
 
+    def updateMacMongo(self, json):
+        logging.info("Update Mac")
+        self._db.trafficMac.update(
+            {"_id": json['_id']},
+            {"$set":
+                 {"quantidade_pacotes": json["quantidade_pacotes"]},
+             }, upsert=True)
+
     def updateTrafficByIpAddr(self, id, json):
         logging.info("Update IP Addresses")
         self._db.trafficIp.update(

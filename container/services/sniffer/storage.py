@@ -45,7 +45,16 @@ class Storage(mongo.MongoDAO):
         self.saveRealTimeTraffic(realTime)
 
     def saveTrafficByMac(self, trafficMac):
-        self.saveTrafficMac(trafficMac)
+        update = self.updateTrafficByMac(trafficMac)
+
+        if update == None:
+            self.saveTrafficByMac(trafficMac)
+        else:
+            quantidade = int(update["quantidade_pacotes"]) + int(trafficMac["quantidade_pacotes"])
+            update["quantidade_pacotes"] = quantidade
+            self.updateMacMongo(update)
+
+
 
     def saveTrafficByIpAddr(self, packets):
         database_ips = self.getTrafficIps(packets)
@@ -71,6 +80,12 @@ class Storage(mongo.MongoDAO):
         for resp in result:
             if resp["hour"] == json["hour"]:
                 return resp
+        return None
+
+    def updateTrafficByMac(self, json):
+        result = self.getTrafficMac(json["date"])
+        for resp in result:
+            return resp
         return None
 
     def getTrafficIps(self, json):
