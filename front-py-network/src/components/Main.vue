@@ -349,6 +349,11 @@
         document.querySelector('.screenMain').style.filter = "blur(4px)"
       },
       async submit(evt){
+        document.querySelector('#rightBar').style.width = "0%";
+        document.querySelector('#rightBar').style.display = "none";
+        document.querySelector('.screenMain').style.filter = "blur(0px)"
+
+        
         let obj = {}
         evt.preventDefault()
         evt.target.forEach(element => {
