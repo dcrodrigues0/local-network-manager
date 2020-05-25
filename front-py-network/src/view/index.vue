@@ -1,5 +1,5 @@
 <template>
-    <main class="p-md-5 p-3">
+    <main class="">
 
         <router-view class="content">
         </router-view>
@@ -58,7 +58,7 @@ export default {
       width: 100%;
       height: 100%!important;
       overflow-y: scroll;
-      background-color: #0f0f0f;
+      background-color: #212124;
       height: auto;
   }
 

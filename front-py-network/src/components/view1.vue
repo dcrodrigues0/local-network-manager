@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content p-md-5 p-3">
       <div class="graphs row">
         <Realtime class="col-md-6 col-12 mt-3" id='fuck' widthProp="100%" heightProp="300px" title="Consumo de pacotes realtime por minuto"/>
         <ChartByRangeDate class="col-md-6 col-12 mt-3" id='fuck' widthProp="100%" heightProp="300px" title="Consumo de pacotes por data início/fim"/>        

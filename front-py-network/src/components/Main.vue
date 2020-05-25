@@ -1,14 +1,19 @@
 <template>
   <div>
-    <div class="rightBar">
-
-    </div>
+    <div id="rightBar" class="rightBar mainView">
+      <div class="closeFilter">
+        <a v-on:click="closeTab()" href="#" class="closeTab">
+          <i class="fas fa-times"></i>
+        </a>
+      </div>
+      <br/>
+      <br/>
       <b-form  @submit="submit" class="row">
 
-        <b-col lg="5" class="my-1 ">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="IP - Origem"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Source-IP"
@@ -19,10 +24,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="5" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Porta - Origem"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Source-Port"
@@ -33,10 +38,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="5" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Min Porta - Origem"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Start-source-port"
@@ -47,10 +52,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="5" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Max Porta - Origem"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="End-source-port"
@@ -61,10 +66,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="5" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="IP - Destino"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Destination-IP"
@@ -75,10 +80,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="5" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Porta-Destino"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Destination-Port"
@@ -89,10 +94,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="5" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Min Porta - Destino"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Start-destination-Port"
@@ -103,10 +108,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="5" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Max Porta - Destino"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="End-destination-Port"
@@ -117,10 +122,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="3" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Protocolo"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Protocol"
@@ -131,10 +136,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="3"  class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Min Tamanho"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Length"
@@ -145,10 +150,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="3"  class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Max Tamanho"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="Length"
@@ -159,10 +164,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="3" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Min TTL"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="ttl"
@@ -173,10 +178,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="3" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Max TTL"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="ttl"
@@ -188,10 +193,10 @@
         </b-col>
 
 
-        <b-col lg="3"  class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Data"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="date"
@@ -202,10 +207,10 @@
           </b-form-group>
         </b-col>
 
-        <b-col lg="3" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Horas"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="hour"
@@ -217,10 +222,10 @@
         </b-col>
 
 
-        <b-col lg="3" class="my-1">
+        <b-col lg="12" class="my-1 ">
           <b-form-group
             label="Límite"
-            label-cols-sm="3"
+            label-cols-sm="6"
             label-align-sm="right"
             label-size="sm"
             label-for="limit"
@@ -231,59 +236,63 @@
           </b-form-group>
         </b-col>
 
-        <b-button type="submit" variant="primary" class="col-lg-4 offset-lg-4 mt-3" size="md">Search</b-button>
+        <b-button type="submit" variant="primary" class="buttonSearch col-lg-4 offset-lg-4 mt-3" size="md">Search <i class="fas fa-search"></i></b-button>
 
       </b-form>
+    </div>
 
-
-
-      <div class="row mt-5">
-          <b-pagination
-          v-model="currentPage"
-          :total-rows="totalRows"
+    <div class="screenMain">
+        <a v-on:click="openTab()" href="#" class="openTab">
+        <i class="fas fa-search"></i>
+        </a>
+        <div class="tableMain p-md-5 p-3">  
+          <b-table
+          stacked="xl"
+          :sticky-header="stickyHeader"
+          :no-border-collapse="noCollapse"
+          responsive
+          :items="items"
+          :fields="fields"
+          :current-page="currentPage"
           :per-page="perPage"
-          align="fill"
-          size="sm"
-          class="col-md-4 offset-md-1"
-          ></b-pagination>
-
-          <b-form-group
-            label="Per page"
-            label-cols-sm="6"
-            label-cols-md="4"
-            label-cols-lg="3"
-            label-align-sm="right"
-            label-size="sm"
-            label-for="perPageSelect"
-            class="mb-0 col-md-4 offset-md-1"
+          @filtered="onFiltered"
+          :filter="filter"
+          :filterIncludedFields="filterOn"
+          class="table table-striped"
           >
+          <!-- We are using utility class `text-nowrap` to help illustrate horizontal scrolling -->
+          </b-table>
+        </div>
+
+      <div class="filters">
+        <div class="row mt-5">
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="totalRows"
+            :per-page="perPage"
+            align="fill"
+            size="sm"
+            class="col-md-5 offset-md-1">
+          </b-pagination>
+          <b-form-group
+              label="Per page"
+              label-cols-sm="6"
+              label-cols-md="4"
+              label-cols-lg="3"
+              label-align-sm="right"
+              label-size="sm"
+              label-for="perPageSelect"
+              class="mb-0 col-md-4 offset-md-1">
             <b-form-select
               v-model="perPage"
               id="perPageSelect"
               size="sm"
-              :options="pageOptions"
-            ></b-form-select>
+              :options="pageOptions">
+            </b-form-select>
           </b-form-group>
-      </div>      
-
-
-    <b-table
-      stacked="xl"
-      :sticky-header="stickyHeader"
-      :no-border-collapse="noCollapse"
-      responsive
-      :items="items"
-      :fields="fields"
-      :current-page="currentPage"
-      :per-page="perPage"
-      @filtered="onFiltered"
-      :filter="filter"
-      :filterIncludedFields="filterOn"
-      class="table table-striped"
-    >
-      <!-- We are using utility class `text-nowrap` to help illustrate horizontal scrolling -->
-    </b-table>
-
+        </div>  
+      </div>
+    </div>
   </div>
 </template>
 
@@ -324,12 +333,21 @@
     },
 
     methods: {
-        onFiltered(filteredItems) {
+      onFiltered(filteredItems) {
         // Trigger pagination to update the number of buttons/pages due to filtering
         this.totalRows = filteredItems.length
         this.currentPage = 1
       },
-
+      closeTab(){
+        document.querySelector('#rightBar').style.width = "0%";
+        document.querySelector('#rightBar').style.display = "none";
+        document.querySelector('.screenMain').style.filter = "blur(0px)"
+      },
+      openTab(){
+        document.querySelector('#rightBar').style.width = "25%";
+        document.querySelector('#rightBar').style.display = "inline";
+        document.querySelector('.screenMain').style.filter = "blur(4px)"
+      },
       async submit(evt){
         let obj = {}
         evt.preventDefault()
@@ -354,10 +372,76 @@
 
 <style >
 
+  .mainView{
+    overflow-x: hidden!important;
+  }
+
+
+  .closeTab{
+    color: #9F9F9F;
+  }
+
+  .tableMain{
+    padding-bottom: 0px!important;
+    margin-bottom: 0px!important;
+  }
+
+  .buttonSearch{
+    font-weight: bold!important;
+  }
+
+  .openTab{
+    color: #9F9F9F;
+    float: right;
+    margin-right:50px;
+    margin-top:30px;
+    font-size: 25px;
+  }
+
+  .page-link{
+    background-color:#1f1f22!important;
+    color: white!important;
+    font-weight: bold;
+  }
+
+  select{
+    background-color: #1f1f22!important;
+    color: white!important;
+  }
+
+  label{
+    color: white!important;
+    font-weight: bold;
+  }
+
+
+  .closeFilter{
+    font-size: 30px;
+    float:left;
+    margin-left: 10px;
+    color: #9F9F9F;
+  }
+
   .rightBar{
-    width: 40%;
+    padding-top: 10px;
+    padding-right:20px; 
+    width: 0%;
+    display: none;
     height: 100vh;
-    
+    z-index: 9999;
+    position: absolute;
+    right: 0;
+    background-color: #252525;
+    transition: 1s;
+  }
+
+  .rightBar button{
+    margin-bottom: 10px;
+  }
+
+  .rightBar label{
+    color: white!important;
+    font-weight: 600;
   }
 
   form{
@@ -374,7 +458,7 @@
   }
 
   table{
-    background-color: #262825;
+    background-color: #212124;
     color: white!important;
   }
 
