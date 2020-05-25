@@ -60,3 +60,9 @@
     }
   }
 </script>
+
+<style>
+ svg, path{
+   pointer-events: none;
+ }
+</style>
