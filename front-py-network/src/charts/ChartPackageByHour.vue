@@ -13,7 +13,7 @@ export default {
     dtIni: {
       type: String,
       required: true,
-      default:'07-05'
+      default:'23-05'
     },
   },
   mounted(){

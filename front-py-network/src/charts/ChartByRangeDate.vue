@@ -12,12 +12,12 @@
           dtIni: {
             type: String,
             required: true,
-            default:'07-05'
+            default:'01-05'
           },
           dtFim: {
             type: String,
             required: true,
-            default:'15-05'
+            default:'03-05'
           },
         },
         mounted(){        

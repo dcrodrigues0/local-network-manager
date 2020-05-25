@@ -14,12 +14,12 @@ export default {
     dtIni: {
       type: String,
       required: true,
-      default:'23-05'
+      default:'14-05'
     },
     dtFim: {
       type: String,
       required: true,
-      default:'02'
+      default:'19'
     },
   },
 
