@@ -11,11 +11,11 @@
             <a href="#" v-on:click="hideMenu" class="main-icons icon-logo" id="hideMenu">
               <i id="icon-direction" class="fas fa-angle-double-left"></i>
             </a>
-            <router-link title="MAC Statistics" to="/" class="main-icons">
-              <i class="fas fa-chart-bar"></i>
-            </router-link>
-            <router-link title="My network package statistics" to="/view1" class="main-icons">
+            <router-link title="Analíse de trafego" to="/" class="main-icons">
               <i class="fas fa-wifi"></i>
+            </router-link>
+            <router-link title="Informações gráficas" to="/view1" class="main-icons">
+              <i class="fas fa-chart-bar"></i>
             </router-link>
         </div>
 
