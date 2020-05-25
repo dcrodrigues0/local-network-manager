@@ -1,4 +1,5 @@
 from container.services.dbutils import mongo
+import container.helper.ip_address as ip
 from container.util import util
 
 
@@ -54,8 +55,6 @@ class Storage(mongo.MongoDAO):
             update["quantidade_pacotes"] = quantidade
             self.updateMacMongo(update)
 
-
-
     def saveTrafficByIpAddr(self, packets):
         database_ips = self.getTrafficIps(packets)
 
@@ -63,7 +62,7 @@ class Storage(mongo.MongoDAO):
             self.saveTrafficIpAddress(packets)
 
         else:
-            ips = self.add_new_ips(database_ips, packets)
+            ips = ip.add_new_ips(database_ips, packets)
             self.updateTrafficByIpAddr(ips["_id"], ips)
 
     def saveRealTimeTrafficTable(self, trafficTable):
@@ -93,25 +92,3 @@ class Storage(mongo.MongoDAO):
         for resp in result:
             return resp
         return None
-
-    def add_new_ips(self, ips, packets):
-
-        for ip_address, quantity_packets in packets["Source-IPs"].copy().items():
-            if ip_address not in ips["Source-IPs"].keys():
-                ips["Source-IPs"][ip_address] = quantity_packets
-                del (packets["Source-IPs"][ip_address])
-
-        for ip_address, quantity_packets in ips["Source-IPs"].items():
-            if ip_address in packets["Source-IPs"]:
-                ips["Source-IPs"][ip_address] += packets["Source-IPs"][ip_address]
-
-        for ip_address, quantity_packets in packets["Destination-IPs"].copy().items():
-            if ip_address not in ips["Destination-IPs"].keys():
-                ips["Destination-IPs"][ip_address] = quantity_packets
-                del (packets["Destination-IPs"][ip_address])
-
-        for ip_address, quantity_packets in ips["Destination-IPs"].items():
-            if ip_address in packets["Destination-IPs"]:
-                ips["Destination-IPs"][ip_address] += packets["Destination-IPs"][ip_address]
-
-        return ips

@@ -2,6 +2,8 @@ import dpkt
 import socket
 import datetime
 from dpkt.compat import compat_ord
+
+import container.helper.ip_address
 from container.services.sniffer import storage as st
 from container.util import util
 from collections import Counter
@@ -41,15 +43,15 @@ def parse(fileCap):
             if eth.type == dpkt.ethernet.ETH_TYPE_ARP:
 
                 protocol = "ARP"
-                source_ip = util.replace_ip_string(inet_to_str(ip.spa))
-                destination_ip = util.replace_ip_string(inet_to_str(ip.tpa))
+                source_ip = container.helper.ip_address.replace_ip_string(inet_to_str(ip.spa))
+                destination_ip = container.helper.ip_address.replace_ip_string(inet_to_str(ip.tpa))
                 length = ip.pln
 
             elif eth.type == dpkt.ethernet.ETH_TYPE_IP:
 
                 packets_length += ip.len
-                source_ip = util.replace_ip_string(inet_to_str(ip.src))
-                destination_ip = util.replace_ip_string(inet_to_str(ip.dst))
+                source_ip = container.helper.ip_address.replace_ip_string(inet_to_str(ip.src))
+                destination_ip = container.helper.ip_address.replace_ip_string(inet_to_str(ip.dst))
                 source_port = proto.sport if hasattr(proto, 'sport') else None
                 destination_port = proto.dport if hasattr(proto, 'dport') else None
                 length = ip.len
@@ -65,8 +67,8 @@ def parse(fileCap):
                 length = ip.plen
                 ttl = ip.hlim
 
-            ips_source.append(source_ip) if source_ip is not None else ips_source.append("Undefined")
-            ips_destination.append(destination_ip) if destination_ip is not None else ips_destination.append("Undefined")
+            if source_ip is not None: ips_source.append(source_ip)
+            if destination_ip is not None: ips_destination.append(destination_ip)
 
             table_record = {"Source-IP": str(source_ip), "Source-Port": source_port,
                             "Destination-IP": str(destination_ip), "Destination-Port": destination_port,

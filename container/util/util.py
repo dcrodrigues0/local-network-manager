@@ -19,10 +19,3 @@ def toJson(value):
 
 def formatFloat(value):
     return "{:.2f}".format(round(value, 2))
-
-
-def replace_ip_string(str1, replace_dots=True):
-    if replace_dots is False:
-        return str1.replace('/', '.')
-    else:
-        return str1.replace('.', '/')
