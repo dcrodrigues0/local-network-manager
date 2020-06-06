@@ -57,6 +57,13 @@
           if (result.value) {
             const answers = result.value;
             this.dtIni = answers[0];
+            window.localStorage.setItem('chart_by_traffic_mac', 
+              JSON.stringify(
+                {
+                  dtIni: answers[0], 
+                }
+              )
+            )
           }
         })
       },
@@ -157,6 +164,13 @@
           dataGraph: null,
           response: "",
           dtIni:"20-05"
+      }
+    },
+
+    created() {
+      if(window.localStorage.getItem('chart_by_traffic_mac') !== null){
+        let obj = JSON.parse(window.localStorage.getItem('chart_by_traffic_mac'));
+        this.dtIni = obj.dtIni;
       }
     },
 

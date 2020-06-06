@@ -68,6 +68,14 @@
             const answers = result.value;
             this.dtIni = answers[0];
             this.dtFim = answers[1];
+            window.localStorage.setItem('chart_by_ip_address', 
+              JSON.stringify(
+                {
+                  dtIni: answers[0], 
+                  dtFim: answers[1]
+                }
+              )
+            )
           }
         })
       },
@@ -143,6 +151,14 @@
           response: "",
           dtIni:"14-05",
           dtFim:"19"
+      }
+    },
+
+    created() {
+      if(window.localStorage.getItem('chart_by_ip_address') !== null){
+        let obj = JSON.parse(window.localStorage.getItem('chart_by_ip_address'));
+        this.dtIni = obj.dtIni;
+        this.dtFim = obj.dtFim
       }
     },
 

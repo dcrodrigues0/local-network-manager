@@ -64,6 +64,13 @@
           if (result.value) {
             const answers = result.value;
             this.dtIni = answers[0];
+            window.localStorage.setItem('chart_package_by_hour', 
+              JSON.stringify(
+                {
+                  dtIni: answers[0]
+                }
+              )
+            )
           }
         })
       },
@@ -142,6 +149,13 @@
           dataGraph: null,
           response: "",
           dtIni:"23-05"
+      }
+    },
+
+    created() {
+      if(window.localStorage.getItem('chart_package_by_hour') !== null){
+        let obj = JSON.parse(window.localStorage.getItem('chart_package_by_hour'));
+        this.dtIni = obj.dtIni;
       }
     },
 
