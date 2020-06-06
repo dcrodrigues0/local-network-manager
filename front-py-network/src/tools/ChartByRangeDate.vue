@@ -66,6 +66,14 @@
             const answers = result.value;
             this.dtIni = answers[0];
             this.dtFim = answers[1];
+            window.localStorage.setItem('chart_by_range_date', 
+              JSON.stringify(
+                {
+                  dtIni: answers[0], 
+                  dtFim: answers[1]
+                }
+              )
+            )
           }
         })
       },
@@ -141,6 +149,14 @@
           response: "",
           dtIni:"01-05",
           dtFim:"03-05"
+      }
+    },
+
+    created() {
+      if(window.localStorage.getItem('chart_by_range_date') !== null){
+        let obj = JSON.parse(window.localStorage.getItem('chart_by_range_date'));
+        this.dtIni = obj.dtIni;
+        this.dtFim = obj.dtFim
       }
     },
 
