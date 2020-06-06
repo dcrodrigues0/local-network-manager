@@ -21,6 +21,8 @@ def parse(fileCap):
     ips_source = []
     traffic_table = []
 
+    ip_destiny_value = []
+
     for ts, buf in fileCap:
         try:
             eth = dpkt.ethernet.Ethernet(buf)
@@ -75,6 +77,9 @@ def parse(fileCap):
                             "Protocol": protocol, "Length": length, "TTL": ttl}
 
             traffic_table.append(table_record)
+
+            ip_destiny_value.append({"ip": destination_ip, "length": length})
+
         except Exception as e:
             print(e)
 
@@ -100,12 +105,12 @@ def parse(fileCap):
     print()
     print("---------------------------")
     print()
-    savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip_address, realtime_table, storage)
+    savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip_address, realtime_table, ip_destiny_value, storage)
 
 
-def savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip, trafficTable, storage):
+def savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip, trafficTable, ip_destiny,storage):
     storage.storageAll(trafficIntraday=intraday, hourTraffic=hourTraffic, trafficMac=trafficMac,
-                       realTimeTraffic=realtime_info, trafficIpAddress=traffic_ip, realTimeTable=trafficTable)
+                       realTimeTraffic=realtime_info, trafficIpAddress=traffic_ip, realTimeTable=trafficTable, ip_destiny=ip_destiny)
 
 
 def generate_mac_addr(address):

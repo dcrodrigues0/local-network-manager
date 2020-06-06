@@ -1,7 +1,7 @@
 from container.services.dbutils import mongo
 import container.helper.ip_address as ip
 from container.util import util
-
+from collections import defaultdict
 
 class Storage(mongo.MongoDAO):
     def __init__(self):
@@ -10,7 +10,7 @@ class Storage(mongo.MongoDAO):
     def storageAll(self, **Kwargs):
         # self.storageTrafficFull(Kwargs.get("trafficFull"))
         self.saveIntraday(Kwargs.get("trafficIntraday"))
-        self.saveTrafficByHour(Kwargs.get("hourTraffic"))
+        self.saveTrafficByHour(Kwargs.get("hourTraffic"), Kwargs.get("ip_destiny"))
         self.saveRealTime(Kwargs.get("realTimeTraffic"))
         self.saveTrafficByMac(Kwargs.get("trafficMac"))
         self.saveTrafficByIpAddr(Kwargs.get("trafficIpAddress"))
@@ -31,15 +31,21 @@ class Storage(mongo.MongoDAO):
                     'avg': util.formatFloat(tamanho / quantidade)}
             self.updateIntradayMongo(update["_id"], json)
 
-    def saveTrafficByHour(self, hourTraffic):
-        result = self.updateHour(hourTraffic)
+    def saveTrafficByHour(self, hourTraffic, ips_destiny):
+        ip_max_length = self.getIpDestiny(ips_destiny)
 
+        result = self.updateHour(hourTraffic)
         if result == None:
+            hourTraffic["ips"] = [ip_max_length]
             self.saveTrafficHourDay(hourTraffic)
 
         else:
             quantidade = int(result["quantidade_pacotes"]) + int(hourTraffic["quantidade_pacotes"])
             result["quantidade_pacotes"] = quantidade
+
+            print(result)
+            print(result["ips"])
+
             self.updateHourMongo(result)
 
     def saveRealTime(self, realTime):
@@ -92,3 +98,13 @@ class Storage(mongo.MongoDAO):
         for resp in result:
             return resp
         return None
+
+    def getIpDestiny(self, jsonIps):
+
+        c = defaultdict(int)
+        for d in jsonIps:
+            if d["length"] != None:
+                c[d['ip']] += int(d['length'])
+        value = max(c.items(), key=lambda k: k[1])
+        return {"ip": value[0], "size": value[1]}
+
