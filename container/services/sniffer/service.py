@@ -1,7 +1,9 @@
+from werkzeug.exceptions import abort
+
 import container.helper.table_formatter as formatter
 import container.helper.graph as graph
 from container.services.dbutils import mongo
-
+import operator
 
 class Service(mongo.MongoDAO):
     def __init__(self):
@@ -44,3 +46,10 @@ class Service(mongo.MongoDAO):
     def getTrafficIp(self, date, hour, direction, exibition, subtitle):
         return graph.makeDataIpGraph(self.getTrafficIpAddress(date, hour), direction, exibition, subtitle)
 
+    def getHighestIpTrafficByHour(self, date, hour, exibition, subtitle):
+        for result in self.getMostTrafficHour(date, hour):
+            dataset = result
+
+        dataset["ips"].sort(key=operator.itemgetter('size'), reverse=True)
+
+        return graph.makeDataSubGraph(dataset["ips"][:5], exibition, subtitle)

@@ -91,6 +91,9 @@ class MongoDAO():
     def getTrafficHour(self, date):
         return self._db.trafficHour.find({"date": date})
 
+    def getMostTrafficHour(self, date, hour):
+        return self._db.trafficHour.find({"date": date, "hour": hour}, {"_id": 0})
+
     def getRealTime(self):
         return self._db.realTime.find({})
 

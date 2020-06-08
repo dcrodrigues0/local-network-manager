@@ -31,6 +31,19 @@ def traffic_hour():
         print(e)
         return responseData("error", 500, [])
 
+@routes.route('/date/hour/ipv4')
+def traffic_hour_ipv4():
+    try:
+        exibition = request.args.get('exibition')
+        subtitle = request.args.get('subtitle')
+        date = request.args.get('date')
+        hour = request.args.get('hour')
+
+        return responseData("success", 200,
+                            service.getHighestIpTrafficByHour(date, hour, exibition, subtitle))
+    except Exception as e:
+        print(e)
+        return responseData("error", 500, [])
 
 @routes.route('/ipv4/source')
 def ipv4_source_traffic():

@@ -50,3 +50,24 @@ def makeDataGraph(value, campoLabel, campoDataset, exibition, subtitle):
     return {'labels': labels,
             'datasets': [{'data': dataset, 'label': subtitle, exibition: 'powderblue',
                           'backgroundColor': 'rgba(176, 224, 230, 0.2)' if exibition == 'borderColor' else colors}]}
+
+
+def makeDataSubGraph(value, exibition, subtitle):
+    labels = []
+    dataset = []
+    colorsAvaliable = tones_of_blue()
+
+    colors = []
+    i = 0
+
+    for doc in value:
+        labels.append(doc["ip"])
+        dataset.append(doc["size"])
+        colors.append(colorsAvaliable[i])
+        if i == 20:
+            i = 0
+        i += 1
+
+    return {'labels': labels,
+            'datasets': [{'data': dataset, 'label': subtitle, exibition: 'powderblue',
+                          'backgroundColor': 'rgba(176, 224, 230, 0.2)' if exibition == 'borderColor' else colors}]}

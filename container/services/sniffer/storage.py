@@ -52,7 +52,6 @@ class Storage(mongo.MongoDAO):
                     has_sum = True
 
             if has_sum is False:
-                print(type(result["ips"]))
                 result["ips"].append(hourTraffic["ips"][0])
 
             self.updateHourMongo(result)
