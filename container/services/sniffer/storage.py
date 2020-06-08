@@ -3,6 +3,7 @@ import container.helper.ip_address as ip
 from container.util import util
 from collections import defaultdict
 
+
 class Storage(mongo.MongoDAO):
     def __init__(self):
         mongo.MongoDAO.__init__(self)
@@ -33,18 +34,16 @@ class Storage(mongo.MongoDAO):
 
     def saveTrafficByHour(self, hourTraffic, ips_destiny):
         ip_max_length = self.getIpDestiny(ips_destiny)
+        hourTraffic["ips"] = [ip_max_length]
 
         result = self.updateHour(hourTraffic)
-        if result == None:
-            hourTraffic["ips"] = [ip_max_length]
+        if result is None:
             self.saveTrafficHourDay(hourTraffic)
 
         else:
             quantidade = int(result["quantidade_pacotes"]) + int(hourTraffic["quantidade_pacotes"])
             result["quantidade_pacotes"] = quantidade
-
-            print(result)
-            print(result["ips"])
+            result["ips"] = result["ips"][0]["size"] + int(hourTraffic["ips"][0]["size"])
 
             self.updateHourMongo(result)
 
@@ -107,4 +106,3 @@ class Storage(mongo.MongoDAO):
                 c[d['ip']] += int(d['length'])
         value = max(c.items(), key=lambda k: k[1])
         return {"ip": value[0], "size": value[1]}
-
