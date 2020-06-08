@@ -25,7 +25,18 @@ export default {
 
   created(){
     this.$http.get(`http://localhost:5000/ipv4/destination?date=${this.dtIni}&hour=${this.dtFim}&exibition=backgroundColor&subtitle=Quantidade de pacotes`)
-    .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true}))
+    .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true, scales: {
+              xAxes: [{
+                ticks: {
+                  fontColor: "white",
+                }
+              }], 
+              yAxes: [{
+                ticks: {
+                  fontColor: "white",
+                }
+              }]
+      }}))
       
   }
 }

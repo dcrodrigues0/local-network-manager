@@ -9,7 +9,7 @@
       </div>
       <div class="size-control" v-if="isModal == 'false'">
         <div>
-          <a v-on:click="selectDataRange()" href="#" @click="configChart">
+          <a v-on:click="filterHour()" href="#" @click="configChart">
             <i class="fas fa-search"></i>
           </a>
           <a href="#" @click="$bvModal.show('my-modal')" id='chart-package-hour' class="zoom">
@@ -29,11 +29,17 @@
       <!-- <Bar :chartdata="dataGraph" :options="{responsive: true, maintainAspectRatio:false}" /> -->
       <Bar v-if="createGraphByFilter()" :dtIni="this.dtIni" :style="{'width': 90%+'%', 'height':85 + '%'}"/>
     </div>
+    <b-modal id='filter-modal' centered size='md'>
+      <h3 class="title-filterchart">Quantidade de bytes transferidos por IPs</h3>
+      <ChartFilterHour :dtIni="this.filterData" :hr="this.hrdata" 
+      :style="{'width': 90%+'%', 'height':85 + '%', backgroundColor: '#212124', padding: '20px'}"/>
+    </b-modal>
   </div>
 </template>
 
 <script>
   import Bar from '@/charts/ChartPackageByHour';
+  import ChartFilterHour from '@/charts/ChartFIlterHour'
   import Swal from 'sweetalert2';
   import '@sweetalert2/theme-dark'; //para deixar a modal dark :)
 
@@ -46,6 +52,38 @@
         }else{
           return false;
         }
+      },
+
+      filterHour(){
+        Swal.fire({
+          title: 'Filtro',
+          showCancelButton: true,
+          confirmButtonText: 'Fazer filtro por Dia',
+          cancelButtonText: 'IP trafego',
+          confirmButtonColor: 'blue',
+          cancelButtonColor: 'blue'
+        }).then(result => {
+          if(result.value){
+            this.selectDataRange()
+          }else{
+
+            this.filterData = this.dtIni;
+            
+            Swal.fire({
+              title: 'Dígite a hora que deseja verificar',
+              input: 'text',
+              inputPlaceholder: '14'
+            }).then(result => {
+              this.hrdata = result.value
+                          this.$bvModal.show('filter-modal')
+
+            })
+            
+            
+          }
+          
+          
+        })
       },
 
       selectDataRange: function () {
@@ -148,7 +186,9 @@
         return {
           dataGraph: null,
           response: "",
-          dtIni:"23-05"
+          dtIni:"23-05",
+          filterData: '',
+          hrdata: ''
       }
     },
 
@@ -157,10 +197,13 @@
         let obj = JSON.parse(window.localStorage.getItem('chart_package_by_hour'));
         this.dtIni = obj.dtIni;
       }
+
+
     },
 
     components:{
-      Bar
+      Bar,
+      ChartFilterHour
     },
     props: {
       widthProp: {
@@ -198,6 +241,16 @@
     flex-direction: row;
     flex-wrap: wrap;
     border-radius: 5px solid black;
+  }
+
+  .title-filterchart{
+    color: white;
+    padding-top: 10px;
+    margin: 0;
+    font-size: 22px;
+    box-sizing: border-box;
+    background-color: #212124;
+    text-align: center;
   }
 
   .tools-tab{

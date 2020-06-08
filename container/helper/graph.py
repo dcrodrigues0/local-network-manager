@@ -61,7 +61,7 @@ def makeDataSubGraph(value, exibition, subtitle):
     i = 0
 
     for doc in value:
-        labels.append(doc["ip"])
+        labels.append(container.helper.ip_address.replace_ip_string(doc["ip"], False))
         dataset.append(doc["size"])
         colors.append(colorsAvaliable[i])
         if i == 20:

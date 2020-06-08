@@ -12,18 +12,17 @@
           dtIni: {
             type: String,
             required: true,
-            default:'01-05'
           },
-          dtFim: {
+          hr:{
             type: String,
-            required: true,
-            default:'03-05'
-          },
+            required: true
+          }
         },
         
         mounted(){        
-          this.$http.get(`http://localhost:5000/range?start=${this.dtIni}&end=${this.dtFim}&exibition=backgroundColor&subtitle=Quantidade De Pacotes`)
-          .then(res => this.renderChart(res.data.data,{maintainAspectRatio: false,responsive:true, scales: {
+          this.$http.get(`http://127.0.0.1:5000/date/hour/ipv4?date=${this.dtIni}&hour=${this.hr}&exibition=backgroundColor&subtitle=Bytes%20Trafegados`)
+          .then(response => {
+              this.renderChart(response.data.data, {maintainAspectRatio: false,responsive:true, scales: {
               xAxes: [{
                 ticks: {
                   fontColor: "white",
@@ -34,7 +33,9 @@
                   fontColor: "white",
                 }
               }]
-      }}))
+      }});
+
+          })
         }
     }
 
