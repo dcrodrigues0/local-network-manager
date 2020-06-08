@@ -43,7 +43,9 @@ class Storage(mongo.MongoDAO):
         else:
             quantidade = int(result["quantidade_pacotes"]) + int(hourTraffic["quantidade_pacotes"])
             result["quantidade_pacotes"] = quantidade
-            result["ips"] = result["ips"][0]["size"] + int(hourTraffic["ips"][0]["size"])
+
+            if result["ips"][0]["ip"] == hourTraffic["ips"][0]["ip"]:
+                result["ips"] = result["ips"][0]["size"] + int(hourTraffic["ips"][0]["size"])
 
             self.updateHourMongo(result)
 
