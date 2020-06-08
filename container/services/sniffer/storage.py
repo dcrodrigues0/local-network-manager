@@ -11,7 +11,7 @@ class Storage(mongo.MongoDAO):
     def storageAll(self, **Kwargs):
         # self.storageTrafficFull(Kwargs.get("trafficFull"))
         self.saveIntraday(Kwargs.get("trafficIntraday"))
-        self.saveTrafficByHour(Kwargs.get("hourTraffic"), Kwargs.get("ip_destiny"))
+        self.saveTrafficByHour(Kwargs.get("hourTraffic"), Kwargs.get("ip_source_values"))
         self.saveRealTime(Kwargs.get("realTimeTraffic"))
         self.saveTrafficByMac(Kwargs.get("trafficMac"))
         self.saveTrafficByIpAddr(Kwargs.get("trafficIpAddress"))
@@ -33,7 +33,7 @@ class Storage(mongo.MongoDAO):
             self.updateIntradayMongo(update["_id"], json)
 
     def saveTrafficByHour(self, hourTraffic, ips_destiny):
-        ip_max_length = self.getIpDestiny(ips_destiny)
+        ip_max_length = self.getSrcIpMaxLength(ips_destiny)
         hourTraffic["ips"] = [ip_max_length]
 
         result = self.updateHour(hourTraffic)
@@ -41,11 +41,19 @@ class Storage(mongo.MongoDAO):
             self.saveTrafficHourDay(hourTraffic)
 
         else:
+            has_sum = False
+
             quantidade = int(result["quantidade_pacotes"]) + int(hourTraffic["quantidade_pacotes"])
             result["quantidade_pacotes"] = quantidade
 
-            if result["ips"][0]["ip"] == hourTraffic["ips"][0]["ip"]:
-                result["ips"] = result["ips"][0]["size"] + int(hourTraffic["ips"][0]["size"])
+            for i in range(0, len(result["ips"])):
+                if result["ips"][i]["ip"] == hourTraffic["ips"][0]["ip"]:
+                    result["ips"][i]["size"] += int(hourTraffic["ips"][0]["size"])
+                    has_sum = True
+
+            if has_sum is False:
+                print(type(result["ips"]))
+                result["ips"].append(hourTraffic["ips"][0])
 
             self.updateHourMongo(result)
 
@@ -100,7 +108,7 @@ class Storage(mongo.MongoDAO):
             return resp
         return None
 
-    def getIpDestiny(self, jsonIps):
+    def getSrcIpMaxLength(self, jsonIps):
 
         c = defaultdict(int)
         for d in jsonIps:

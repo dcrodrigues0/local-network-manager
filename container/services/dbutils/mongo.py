@@ -62,7 +62,8 @@ class MongoDAO():
         self._db.trafficHour.update(
             {"_id": json['_id']},
             {"$set":
-                 {"quantidade_pacotes": json["quantidade_pacotes"]},
+                 {"quantidade_pacotes": json["quantidade_pacotes"],
+                  "ips": json["ips"]}
              }, upsert=True)
 
     def updateMacMongo(self, json):
@@ -126,4 +127,3 @@ class MongoDAO():
             pipeline.insert(0, date_args)
 
         return self._db.trafficTable.aggregate(pipeline)
-

@@ -21,7 +21,7 @@ def parse(fileCap):
     ips_source = []
     traffic_table = []
 
-    ip_destiny_value = []
+    ip_source_values = []
 
     for ts, buf in fileCap:
         try:
@@ -78,7 +78,7 @@ def parse(fileCap):
 
             traffic_table.append(table_record)
 
-            ip_destiny_value.append({"ip": destination_ip, "length": length})
+            ip_source_values.append({"ip": source_ip, "length": length})
 
         except Exception as e:
             print(e)
@@ -105,12 +105,12 @@ def parse(fileCap):
     print()
     print("---------------------------")
     print()
-    savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip_address, realtime_table, ip_destiny_value, storage)
+    savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip_address, realtime_table, ip_source_values, storage)
 
 
-def savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip, trafficTable, ip_destiny,storage):
+def savetTraffic(intraday, hourTraffic, trafficMac, realtime_info, traffic_ip, trafficTable, ip_source_values,storage):
     storage.storageAll(trafficIntraday=intraday, hourTraffic=hourTraffic, trafficMac=trafficMac,
-                       realTimeTraffic=realtime_info, trafficIpAddress=traffic_ip, realTimeTable=trafficTable, ip_destiny=ip_destiny)
+                       realTimeTraffic=realtime_info, trafficIpAddress=traffic_ip, realTimeTable=trafficTable, ip_source_values=ip_source_values)
 
 
 def generate_mac_addr(address):
