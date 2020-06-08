@@ -22,7 +22,6 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 
 def realtime():
-    print("start")
     while True:
 
         file = export+str(current_milli_time())

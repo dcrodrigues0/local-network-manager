@@ -1,6 +1,5 @@
 import os
 import time
-
 import dpkt
 
 from container.engines import parsePcap as parser
@@ -8,8 +7,13 @@ from container.engines import parsePcap as parser
 fileSrc = os.getenv("FILE_PATH")
 backup = os.getenv("FILE_FOLDER_BACKUP")
 queue = []
+queueFile = os.getenv("QUEUE_FILE")
 
 def proccess():
+    if len(queue) > 0:
+            files = queueFile.split(";")
+            for f in files:
+                addQueue(f)
 
     while True:
         if len(queue) == 0:
