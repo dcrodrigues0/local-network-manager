@@ -1,5 +1,7 @@
 from flask import Blueprint
 from flask import request
+from werkzeug.exceptions import HTTPException
+
 from container.services.sniffer import service
 from container.services.admin import admin
 
@@ -39,10 +41,10 @@ def traffic_hour_ipv4():
         date = request.args.get('date')
         hour = request.args.get('hour')
 
-        return responseData("success", 200,
-                            service.getHighestIpTrafficByHour(date, hour, exibition, subtitle))
+        return responseData("success", 200, service.getHighestIpTrafficByHour(date, hour, exibition, subtitle))
+    except HTTPException as e:
+        return responseData("No data found", 404, [])
     except Exception as e:
-        print(e)
         return responseData("error", 500, [])
 
 @routes.route('/ipv4/source')

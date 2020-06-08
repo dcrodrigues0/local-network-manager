@@ -47,6 +47,11 @@ class Service(mongo.MongoDAO):
         return graph.makeDataIpGraph(self.getTrafficIpAddress(date, hour), direction, exibition, subtitle)
 
     def getHighestIpTrafficByHour(self, date, hour, exibition, subtitle):
+        dataset = None
+        resultset = self.getMostTrafficHour(date, hour)
+
+        if resultset.count() == 0: return abort(404)
+
         for result in self.getMostTrafficHour(date, hour):
             dataset = result
 
