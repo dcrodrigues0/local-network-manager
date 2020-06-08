@@ -56,12 +56,12 @@
 
       filterHour(){
         Swal.fire({
-          title: 'Filtro',
+          title: 'Opções',
           showCancelButton: true,
-          confirmButtonText: 'Fazer filtro por Dia',
-          cancelButtonText: 'IP trafego',
-          confirmButtonColor: 'blue',
-          cancelButtonColor: 'blue'
+          confirmButtonText: 'FIltrar por dia',
+          cancelButtonText: 'Visualizar IPs com maior consumo de dados',
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#3085d6',
         }).then(result => {
           if(result.value){
             this.selectDataRange()
@@ -75,8 +75,9 @@
               inputPlaceholder: '14'
             }).then(result => {
               this.hrdata = result.value
-                          this.$bvModal.show('filter-modal')
-
+              if( this.hrdata !== ""){
+                  this.$bvModal.show('filter-modal')
+              }
             })
             
             
