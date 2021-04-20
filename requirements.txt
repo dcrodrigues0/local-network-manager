@@ -4,7 +4,7 @@ flask-cors
 itsdangerous==1.1.0
 Jinja2==2.11.1
 MarkupSafe==1.1.1
-py==1.8.1
+py==1.10.0
 Werkzeug==1.0.0
 dpkt==1.9.2
 pymongo==3.10.1
